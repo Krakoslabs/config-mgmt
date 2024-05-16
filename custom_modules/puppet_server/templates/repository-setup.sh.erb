@@ -1,0 +1,14 @@
+#!/bin/bash
+
+service puppet stop
+service <%=@service_name %> stop
+
+ssh-keyscan github.com >> /root/.ssh/known_hosts
+rm -rf <%=@working_directory%>
+git clone <%=@repository_url%> <%=@working_directory %>
+
+cd <%=@working_directory %>
+bundle install
+bundle exec librarian-puppet install
+
+touch <%=@lock_file %>

@@ -1,0 +1,25 @@
+---
+:backends:
+#  - eyaml
+  - yaml
+
+:hierarchy:
+  - "%{::datacenter}/%{::clientcert}"
+  - "%{::datacenter}/%{::role}"
+  - "global/%{::role}"
+  - "operatingsystem/%{::kernel}"
+  - "%{::clientcert}"
+  - "%{::datacenter}"
+  - "%{::environment}"
+  - base
+
+:yaml:
+  :datadir: /etc/puppetlabs/code/hiera
+
+# :eyaml:
+#   :datadir: /etc/puppetlabs/code/hiera
+#   :pkcs7_private_key: "/etc/puppet/keys/%{::environment}_private_key.pkcs7.pem"
+#   :pkcs7_public_key: "/etc/puppet/keys/%{::environment}_public_key.pkcs7.pem"
+#   :extension: yaml
+
+:merge_behavior: deeper

@@ -1,0 +1,28 @@
+---
+server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl', 'git' ]
+
+puppet::server::allowed_domains: '*vagrant.local'
+puppet::server::encryption_key: 'prueba dos'
+puppet::server::github_ssh_key: 'test'
+puppet::server::working_directory: '/etc/puppetlabs/puppet'
+puppet::repository::branch: 'master'
+
+puppet::dashboard::puppetdb::port: 8081
+puppet::dashboard::puppetdb::ssl_port: 8082
+puppet::dashboard::version: 'v0.3.0'
+puppet::dashboard::authentication::enabled: true
+
+puppet::agent::version: '6.0.2'
+puppet::agent::runinterval: 1200
+puppet::agent::interval_rand_max: 600
+puppet::agent::enabled: false
+
+linux_security::enable_ssh_only_logins: true
+
+users::cloudops_team:
+  mgabilondo:
+    ensure: 'present'
+    ssh_key:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC249wVfe6ci/QnnZGwJUIeVOT9xmidLnvyl9XXuzHxNUA9XM8t6UslXb92g8n0ihGrvz4bkNdU1KcBYDklks4TBDpFcvHV01PNdLe4FgPxk5bMScsMc9IkXWcAaFJHyF7VcUdvnjwNGhOUQQiPECITlRTW82Hd8n1pZqTXzP2pKGSVP5Xp2LEw0Mv6W+pGIdT9UY0VP2prBERrle7BE3eRYxhBK57eUk4W8K24hljA5/DWbLAlafX59VfsNs5LMDhwa7f42f8yowC2gy0m728W/m9wAnW+j42IGxYUaFTjUSt0kLkccamt87UYSPxQSh/CqcK9UPPrfSDc0j2TGR7DvR74XRe1dzHZZnrLTiRVR7glX+W4+Oiv5HnymcZ6qDIGsouzKHlm79X9wunK1P0D8MGNv2EHOfZxjXLpHdWz9PleDDPPy28YpLjLwm5fdXDKi4Wzkpb9k+q8t4v/Ymaqk95dICoNdGDfevDcmudHiIVxezgzjmjKzhnqzjzwh7AcMi0ktU3n0b6rpxcT108mwULpTh2qxWBhSNsz5m3/VaFuwr+0AC2QNX5ENizdZGU4R5yc8nd5oiHbHcdMoEwGPAJuQvkTSCIqJfumUvjUwekIK3kfmGa/V7pkvl6EjLCE3txCpAbpdYtlpt3xUbN1qlXbMICZpKLmKidFKs0IwQ== marcos.gabilondo@appfire.com
+    groups: 
+      - adm

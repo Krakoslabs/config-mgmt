@@ -1,0 +1,15 @@
+#!/bin/bash
+
+service puppetserver stop
+
+rm -rf /var/lib/puppet/ssl
+
+# Generate a cert for the new FQDN
+puppet cert generate <%=@fqdn %>
+
+# Ensuring the signed cert is placed within the CA folders
+puppet cert list --all
+
+service puppetserver start
+
+touch <%=@lock_file %>

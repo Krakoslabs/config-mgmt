@@ -1,0 +1,28 @@
+[main]
+vardir             = /opt/puppetlabs/server/data/puppetserver
+logdir             = /var/log/puppetlabs/puppetserver
+rundir             = /var/run/puppetlabs/puppetserver
+pidfile            = /var/run/puppetlabs/puppetserver/puppetserver.pid
+codedir            = /etc/puppetlabs/code
+environmentpath    = $codedir/environments
+pluginsync         = false
+use_cached_catalog = false
+factpath           = $vardir/lib/facter
+
+certname    = <%=@certificate_name %>
+server      = <%=@server_address %>
+environment = <%=@environment %>
+
+[master]
+
+trusted_node_data  = true
+stringify_facts    = false
+
+<% if @use_puppet_db then %>
+storeconfigs = true
+storeconfigs_backend = puppetdb
+reports = puppetdb
+<% end %>
+
+[agent]
+pidfile = /var/run/puppetlabs/puppetserver/puppetagent.pid

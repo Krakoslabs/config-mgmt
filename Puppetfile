@@ -5,19 +5,20 @@
 forge "https://forge.puppetlabs.com"
 
 # Core Modules
-# mod 'krk-profile', :path => 'profile'
-# mod 'krk-role', :path => 'role'
+mod 'krk-profile', :path => 'profile'
+mod 'krk-role', :path => 'role'
 mod 'krk-facts', :path => 'custom_modules/facts'
 # mod 'krk-sensu_configuration', :path => 'custom_modules/sensu_configuration'
-# mod 'krk-puppetagent', :path => 'custom_modules/puppetagent'
+mod 'krk-puppetagent', :path => 'custom_modules/puppetagent'
+mod 'krk-puppet_server', :path => 'custom_modules/puppet_server'
 mod 'krk-linux_security', :path => 'custom_modules/linux_security'
 
 
 # Puppet Server Modules
 mod 'puppetlabs/concat', '9.0.2'
 mod 'puppetlabs-stdlib', '9.6.0'
-# mod 'gutocarvalho-puppetserver', '1.4.0'
-# mod 'puppetlabs/puppetdb', '8.1.0'
+mod 'gutocarvalho-puppetserver', '1.4.0'
+mod 'puppetlabs/puppetdb', '8.1.0'
 # mod 'puppet/puppetboard', '10.0.0'
 # mod 'puppet-epel', '5.0.0'
 # mod 'puppetlabs-apache', '3.4.0'
@@ -39,7 +40,7 @@ mod 'ghoneycutt-timezone', '4.0.0'
 # mod 'puppet-nginx', '5.0.0'
 # mod 'puppetlabs-apt', '9.4.0'
 # mod 'herculesteam-augeasproviders_core', '2.4.0'
-# mod 'camptocamp-augeas', '1.9.0'
+mod 'camptocamp-augeas', '1.9.0'
 # mod 'puppetlabs-vcsrepo', '1.5.0'
 # mod 'inkblot-bind', '7.4.0'
 # mod 'puppet-consul', '8.1.0'
