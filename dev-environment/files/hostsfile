@@ -1,0 +1,22 @@
+127.0.0.1 localhost
+172.16.0.2 puppetserver.vagrant.local puppetserver
+
+172.16.0.11 win2k12r2-01.vagrant.local win2k12r2-01
+172.16.0.12 win2k12r2-02.vagrant.local win2k12r2-02
+172.16.0.13 win2k12r2-03.vagrant.local win2k12r2-03
+172.16.0.14 win2k12r2-04.vagrant.local win2k12r2-04
+172.16.0.15 win2k12r2-05.vagrant.local win2k12r2-05
+172.16.0.16 win2k12r2-06.vagrant.local win2k12r2-06
+172.16.0.17 win2k12r2-07.vagrant.local win2k12r2-07
+172.16.0.18 win2k12r2-08.vagrant.local win2k12r2-08
+172.16.0.19 win2k12r2-09.vagrant.local win2k12r2-09
+
+172.16.0.41 ubuntu20-1.vagrant.local ubuntu20-1
+172.16.0.42 ubuntu20-2.vagrant.local ubuntu20-2
+172.16.0.43 ubuntu20-3.vagrant.local ubuntu20-3
+172.16.0.44 ubuntu20-4.vagrant.local ubuntu20-4
+172.16.0.45 ubuntu20-5.vagrant.local ubuntu20-5
+172.16.0.46 ubuntu20-6.vagrant.local ubuntu20-6
+172.16.0.47 ubuntu20-7.vagrant.local ubuntu20-7
+172.16.0.48 ubuntu20-8.vagrant.local ubuntu20-8
+172.16.0.49 ubuntu20-9.vagrant.local ubuntu20-9

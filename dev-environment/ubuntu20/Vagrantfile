@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+NUMBER_OF_BOXES_TO_CREATE = 3
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(2) do |config|
+
+  (1..NUMBER_OF_BOXES_TO_CREATE).each do |machineNumber|
+      config.ssh.insert_key = false
+      config.vm.define "ubuntu20-#{machineNumber}" do |machine|
+      machine.vm.box = "bento/ubuntu-20.04"
+      machine.vm.hostname = "centos7-#{machineNumber}.vagrant.local"
+      machine.vm.network "private_network", ip: "172.16.0.#{40 + machineNumber}"
+      machine.vm.synced_folder "../..", "/vagrant"
+
+      machine.vm.provider "virtualbox" do |vb|
+         vb.memory = "2048"
+      end
+
+      machine.vm.provision "shell", inline: <<-SHELL
+        sudo su
+        rm -f /etc/localtime && ln -s /usr/share/zoneinfo/UTC /etc/localtime
+
+        echo 'Adding `sudo su` to the `.bashrc` for `vagrant` user...'
+        echo 'sudo su' >> /home/vagrant/.bashrc
+
+        echo "Settings the hosts file"
+        /bin/bash /vagrant/dev-environment/scripts/hostsfile.sh
+
+        echo "CentOS PuppetServer installation...."
+        /bin/bash /vagrant/dev-environment/scripts/puppetagent.sh
+
+        echo "Enabling Ansible User...."
+        /bin/bash /vagrant/dev-environment/scripts/ansible_ssh_key.sh
+
+        echo "Done..."
+
+      SHELL
+
+    end
+  end
+end
