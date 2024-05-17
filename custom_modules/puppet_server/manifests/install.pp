@@ -8,14 +8,14 @@ class puppet_server::install {
   $jvm_initial_memory  = "${jvm_initial_memory_raw}M"
   $jvm_assigned_memory = "${jvm_assigned_memory_raw}M"
 
-  # class { '::puppet_server::repository': }
-
-  class { '::puppetserver':
-      java_args => "-Xms${jvm_initial_memory} -Xmx${jvm_assigned_memory} -XX:MaxPermSize=256m"
-    },
+  file_line { 'puppetserver-memory':
+    path => '/etc/default/puppetserver',  
+    line => "JAVA_ARGS=\"-Xms${jvm_initial_memory} -Xmx${jvm_assigned_memory} -Djruby.logger.class=com.puppetlabs.jruby_utils.jruby.Slf4jLogger\"",
+    match   => "^JAVA_ARGS=.*$",
+    notify => Service['puppetserver']
   }
 
-  service { 'puppet':
+  service { 'puppetserver':
     ensure => true,
     enable => true,
   }
