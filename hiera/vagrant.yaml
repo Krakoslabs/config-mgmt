@@ -6,7 +6,7 @@ puppet::server::db_hostname: "%{hiera('puppet::dashboard::db_hostname')}"
 puppet::server::use_puppet_db: false
 
 puppet::dashboard::external_url: 'puppetdashboard.vagrant.local'
-puppet::dashboard::db_hostname: 'centos7-3.vagrant.local'
+puppet::dashboard::db_hostname: 'ubuntu20-1.vagrant.local'
 puppet::dashboard::user: 'puppet'
 puppet::dashboard::password: 'puppet'
 puppet::dashboard::secure: false
@@ -14,3 +14,4 @@ puppet::dashboard::secure: false
 puppet::agent::runinterval: 300
 puppet::agent::interval_rand_max: 150
 puppet::agent::enabled: false
+puppet::agent::version: 7.30.0

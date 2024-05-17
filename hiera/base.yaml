@@ -1,5 +1,5 @@
 ---
-server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl', 'git' ]
+server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl' ]
 
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::encryption_key: 'prueba dos'
@@ -9,7 +9,7 @@ puppet::repository::branch: 'master'
 
 puppet::dashboard::puppetdb::port: 8081
 puppet::dashboard::puppetdb::ssl_port: 8082
-puppet::dashboard::version: 'v0.3.0'
+puppet::dashboard::version: 'v3.0.1'
 puppet::dashboard::authentication::enabled: true
 
 puppet::agent::version: '6.0.2'
