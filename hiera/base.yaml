@@ -5,6 +5,7 @@ puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::encryption_key: 'prueba dos'
 puppet::server::github_ssh_key: 'test'
 puppet::server::working_directory: '/etc/puppetlabs/puppet'
+puppet::server::use_puppet_db: false
 puppet::repository::branch: 'master'
 
 puppet::dashboard::puppetdb::port: 8081

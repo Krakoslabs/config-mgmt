@@ -15,10 +15,13 @@ mod 'krk-linux_security', :path => 'custom_modules/linux_security'
 
 
 # Puppet Server Modules
-mod 'puppetlabs/concat', '7.0.0'
-mod 'puppetlabs-stdlib', '6.6.0'
-# mod 'gutocarvalho-puppetserver', '1.4.0'
-# mod 'puppetlabs/puppetdb', '8.1.0'
+mod 'puppetlabs/concat', '9.0.2'
+mod 'puppetlabs-stdlib', '9.6.0'
+mod 'puppetlabs-puppetdb', '8.1.0'
+mod 'puppetlabs-postgresql', '10.3.0'
+mod 'puppet-systemd', '7.0.0'
+mod 'puppetlabs-apt', '9.4.0'
+mod 'puppetlabs-docker', '9.1.0'
 # mod 'puppet/puppetboard', '10.0.0'
 # mod 'puppet-epel', '5.0.0'
 # mod 'puppetlabs-apache', '3.4.0'
