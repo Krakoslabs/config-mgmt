@@ -36,25 +36,26 @@ function install_centos (){
 
 # Check me if I work
 function install_ubuntu (){
-  writeLog "Installing wget..."
+  writeLog "Update & Installing wget..."
+  apt-get update > /dev/null 2>&1
   apt-get install -y wget > /dev/null 2>&1
 
   writeLog "Configuring PuppetLabs repo..."
-  version=$VERSION_CODENAME
   REPO_URL="https://apt.puppetlabs.com/puppet7-release-focal.deb"
-  wget $REPO_URL > /dev/null 2>&1
-  /usr/bin/dpkg -i puppet7-release-focal.deb > /dev/null 2>&1
+  wget $REPO_URL
+  /usr/bin/dpkg -i puppet7-release-focal.deb
 
 
   writeLog "Installing Puppet Agent..."
-  apt-get update > /dev/null 2>&1
-  apt-get install -y puppet-agent > /dev/null 2>&1
+  apt-get update
+  apt-get install -y puppet-agent
 }
 
 if [ $(echo $NAME | grep -ci "ubuntu") == 1 ]; then
   install_ubuntu
 else
-  install_centos
+  ## Updateme to support CentOS
+  install_ubuntu
 fi
 
 writeLog "Setting the Puppet Configuration.."

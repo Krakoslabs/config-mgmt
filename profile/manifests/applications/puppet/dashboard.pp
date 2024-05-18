@@ -1,4 +1,10 @@
-class profile::applications::puppet::dashboard {
+class profile::applications::puppet::dashboard(
+  $puppet_db_server = 'localhost',
+  $puppet_db_listen_port = 8082,
+  $listen_port = 443,
+  $secret_key = 'a1526c5a6aba0fa0a8fcc541c92fff7d53af750cb086306d332ac8c041f3bb2f',
+  $puppet_db_ssl_verify = 'false'
+){
 
   file { '/etc/puppetboard':
     ensure => directory,
@@ -16,20 +22,21 @@ class profile::applications::puppet::dashboard {
 
   include docker
 
+  ## Github ref: https://github.com/voxpupuli/puppetboard
   docker::image { 'ghcr.io/voxpupuli/puppetboard': }
 
   docker::run { 'puppetboard':
     image   => 'ghcr.io/voxpupuli/puppetboard',
     volumes => ['/etc/puppetboard:/etc/puppetboard:ro'],
     env     => [
-      'PUPPETDB_HOST=ubuntu20-1.vagrant.local', # this must be the certname or DNS_ALT_NAME of the PuppetDB host
-      'PUPPETDB_PORT=8082',
+      "PUPPETDB_HOST=${puppet_db_server}", # this must be the certname or DNS_ALT_NAME of the PuppetDB host
+      "PUPPETDB_PORT=${puppet_db_listen_port}",
       'PUPPETBOARD_PORT=443',
       'ENABLE_CATALOG=true',
-      'PUPPETDB_SSL_VERIFY=false',
+      "PUPPETDB_SSL_VERIFY=${puppet_db_ssl_verify}",
       'PUPPETDB_KEY=/etc/puppetboard/key.pem',
       'PUPPETDB_CERT=/etc/puppetboard/cert.pem',
-      'SECRET_KEY=puppetdb',
+      "SECRET_KEY=${secret_key}",
       'DEFAULT_ENVIRONMENT=*',
     ],
     net     => 'host',

@@ -2,14 +2,14 @@
 puppet::server::address: 'puppetserver.vagrant.local'
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::certificate_name: 'puppetserver.vagrant.local'
-puppet::server::db_hostname: "%{hiera('puppet::dashboard::db_hostname')}"
-puppet::server::use_puppet_db: false
+puppet::server::db_hostname: "%{hiera('profile::configurations::puppet::dashboard::puppet_db_server')}"
+puppet::server::use_puppet_db: true
 
-puppet::dashboard::external_url: 'puppetdashboard.vagrant.local'
-puppet::dashboard::db_hostname: 'ubuntu20-1.vagrant.local'
-puppet::dashboard::user: 'puppet'
-puppet::dashboard::password: 'puppet'
-puppet::dashboard::secure: false
+
+profile::configurations::puppet::dashboard::puppet_db_server: 'ubuntu20-1.vagrant.local'
+# puppet::dashboard::user: 'puppet'
+# puppet::dashboard::password: 'puppet'
+# puppet::dashboard::secure: false
 
 puppet::agent::runinterval: 300
 puppet::agent::interval_rand_max: 150

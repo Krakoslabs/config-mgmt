@@ -8,10 +8,14 @@ puppet::server::working_directory: '/etc/puppetlabs/puppet'
 puppet::server::use_puppet_db: false
 puppet::repository::branch: 'master'
 
+profile::configurations::puppet::db::listen_port: 8081
+profile::configurations::puppet::db::ssl_listen_port: 8082
+
+profile::configurations::puppet::dashboard::listen_port: 443
+profile::configurations::puppet::dashboard::puppet_db_listen_port: "%{hiera('profile::configurations::puppet::db::ssl_listen_port')}"
+
 puppet::dashboard::puppetdb::port: 8081
 puppet::dashboard::puppetdb::ssl_port: 8082
-puppet::dashboard::version: 'v3.0.1'
-puppet::dashboard::authentication::enabled: true
 
 puppet::agent::version: '6.0.2'
 puppet::agent::runinterval: 1200
