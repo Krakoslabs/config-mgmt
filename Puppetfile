@@ -22,6 +22,19 @@ mod 'puppetlabs-postgresql', '10.3.0'
 mod 'puppet-systemd', '7.0.0'
 mod 'puppetlabs-apt', '9.4.0'
 mod 'puppetlabs-docker', '9.1.0'
+## Use the default module when this PR will merge: https://github.com/sensu/sensu-puppet/pull/1339
+mod 'sensu-sensu',
+    :git => 'https://github.com/Krakoslabs/sensu-puppet.git',
+    :branch => 'fix_postgresql_version'
+mod 'puppet-redis', '11.0.0'
+mod 'puppet-rabbitmq',
+    :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',
+    :branch => 'fix_systemd_version'
+mod 'puppet-archive', '7.1.0'
+mod 'puppet-erlang',
+    :git => 'https://github.com/mj/puppet-erlang.git',
+    :branch => 'master'
+# mod 'yelp-uchiwa', '2.1.0'
 # mod 'puppet/puppetboard', '10.0.0'
 # mod 'puppet-epel', '5.0.0'
 # mod 'puppetlabs-apache', '3.4.0'

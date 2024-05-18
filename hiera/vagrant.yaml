@@ -3,7 +3,7 @@ puppet::server::address: 'puppetserver.vagrant.local'
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::certificate_name: 'puppetserver.vagrant.local'
 puppet::server::db_hostname: "%{hiera('profile::configurations::puppet::dashboard::puppet_db_server')}"
-puppet::server::use_puppet_db: true
+puppet::server::use_puppet_db: false
 
 
 profile::configurations::puppet::dashboard::puppet_db_server: 'ubuntu20-1.vagrant.local'
@@ -15,3 +15,23 @@ puppet::agent::runinterval: 300
 puppet::agent::interval_rand_max: 150
 puppet::agent::enabled: false
 puppet::agent::version: 7.30.0
+
+sensu::agent::enabled: false
+sensu::server::rabbitmq::hosts: 'ubuntu20-2.vagrant.local'
+
+sensu::uchiwa::username: 'uchiwa'
+sensu::uchiwa::password: 'uchiwa'
+# TODO (09/11/2018) Change me to a string
+sensu::uchiwa::hosts:
+  -
+    host: 'ubuntu20-2.vagrant.local'
+
+sensu::rabbitmq::username: 'sensu'
+sensu::rabbitmq::password: 'sensu'
+sensu::rabbitmq::cluster_enabled: false
+sensu::rabbitmq::cluster_nodes: ['ubuntu20-2.vagrant.local']
+
+sensu::redis::host: 'ubuntu20-2.vagrant.local'
+sensu::redis::password: 'sensu'
+sensu::redis::master_password: 'admin'
+sensu::redis::master_address: 'centos7-1.vagrant.local'

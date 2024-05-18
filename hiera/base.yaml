@@ -24,6 +24,34 @@ puppet::agent::enabled: false
 
 linux_security::enable_ssh_only_logins: true
 
+sensu::server::log_level: warn
+sensu::client::log_level: warn
+
+sensu::client::linux_version: '1.7.0'
+sensu::client::redhat_version: '1.5.0'
+sensu::client::windows_version: '0.27.1-2'
+
+sensu::rabbitmq::erlang_version: 'R16B-03.18.el7'
+sensu::rabbitmq::vhost: '/sensu'
+sensu::redis::version: '5:5.0.7-2ubuntu0.1'
+sensu::redis::port: 6379
+
+sensu::uchiwa::version: '1.3.1-1'
+
+sensu::agent::enabled: true
+sensu::metrics::enable: "%{hiera('sensu::agent::enabled')}"
+sensu::client::subscriptions: [ 'sensu' ]
+sensu::default_check_handlers: [ 'debug' ]
+sensu::default_metric_handlers: [ 'metrics' ]
+sensu::default_interval: 60
+sensu::default_interval_rand_max: 20
+sensu::default_occurrences: 5
+sensu::default_refresh: 10
+sensu::directory: '/var/sensu'
+
+sensu::linux_ruby_path: '/opt/sensu/embedded/bin/'
+sensu::windows_ruby_path: 'C:\\opt\\sensu\\embedded\\bin\\'
+
 users::cloudops_team:
   marcos.gabilondo:
     ensure: 'present'
