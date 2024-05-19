@@ -1,9 +1,9 @@
 class profile::applications::puppet::dashboard(
-  $puppet_db_server = 'localhost',
+  $puppet_db_server      = 'localhost',
   $puppet_db_listen_port = 8082,
-  $listen_port = 443,
-  $secret_key = 'a1526c5a6aba0fa0a8fcc541c92fff7d53af750cb086306d332ac8c041f3bb2f',
-  $puppet_db_ssl_verify = 'false'
+  $listen_port           = 443,
+  $secret_key            = 'a1526c5a6aba0fa0a8fcc541c92fff7d53af750cb086306d332ac8c041f3bb2f',
+  $puppet_db_ssl_verify  = 'false'
 ){
 
   file { '/etc/puppetboard':

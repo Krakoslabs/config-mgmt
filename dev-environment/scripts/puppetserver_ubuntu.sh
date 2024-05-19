@@ -88,7 +88,7 @@ writeLog "Mounting the Puppet Repository"
 ln -s /vagrant $puppetdir
 sleep 5
 
-echo "alias bu='cd /etc/puppetlabs/code && date && echo "Debug build: bundle exec librarian-puppet install --verbose" && bundle exec librarian-puppet install'" >> /root/.bashrc
+echo "alias bu='cd /etc/puppetlabs/code && date && echo "Debug Puppet build: bundle exec librarian-puppet install --verbose" && bundle exec librarian-puppet install'" >> /root/.bashrc
 cd $puppetdir
 
 writeLog "Installing Bundler..."

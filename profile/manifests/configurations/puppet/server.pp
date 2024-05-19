@@ -1,14 +1,14 @@
-class profile::configurations::puppet::server {
-
-  $use_puppet_db         = hiera('puppet::server::use_puppet_db', false)
-  $puppet_db_server      = hiera('puppet::server::db_hostname', undef)
-  $ensure_cron           = hiera('puppet::server::cron', 'absent')
-  $retries_before_slack  = hiera('puppet::server::slack_attempt_limit', 3)
-  $branch                = hiera('puppet::server::branch', 'production')
-  $eyaml_key_content     = hiera('puppet::server::encryption_key', 'test2')
-  $ssh_key_content       = hiera('puppet::server::github_ssh_key', 'test')
-  $puppet_server_address = hiera('puppet::server::address')
-  $certificate_name      = hiera('puppet::server::certificate_name', 'master.vagrant.local')
+class profile::configurations::puppet::server (
+  $use_puppet_db         = hiera('puppet::server::use_puppet_db', false),
+  $puppet_db_server      = hiera('puppet::server::db_hostname', undef),
+  $ensure_cron           = hiera('puppet::server::cron', 'absent'),
+  $retries_before_slack  = hiera('puppet::server::slack_attempt_limit', 3),
+  $branch                = hiera('puppet::server::branch', 'production'),
+  $eyaml_key_content     = hiera('puppet::server::encryption_key', 'test2'),
+  $ssh_key_content       = hiera('puppet::server::github_ssh_key', 'test'),
+  $puppet_server_address = hiera('puppet::server::address'),
+  $certificate_name      = hiera('puppet::server::certificate_name', 'puppetserver.vagrant.local'),
+) {
 
   if $facts['fqdn'] == 'puppetserver.vagrant.local' {
     $environment = 'vagrant'

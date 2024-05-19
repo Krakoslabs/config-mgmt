@@ -1,13 +1,13 @@
 class profile::applications::puppet::db(
-  $version     = '7.18.0-1focal',
-  $listen_port = 8081,
+  $version         = '7.18.0-1focal',
+  $listen_port     = 8081,
   $ssl_listen_port = 8082,
-  $listen_address = '0.0.0.0',
+  $listen_address  = '0.0.0.0',
   $manage_firewall = false,
-  $disable_ssl = false,
+  $disable_ssl     = false,
 ){
-  $jvm_initial_memory   = floor($::memorysize_mb * 0.25)
-  $jvm_assigned_memory  = floor($::memorysize_mb * 0.5)
+  $jvm_initial_memory  = floor($::memorysize_mb * 0.25)
+  $jvm_assigned_memory = floor($::memorysize_mb * 0.5)
 
   class { '::puppetdb::globals':
     version => $version,

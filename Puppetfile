@@ -26,14 +26,14 @@ mod 'puppetlabs-docker', '9.1.0'
 mod 'sensu-sensu',
     :git => 'https://github.com/Krakoslabs/sensu-puppet.git',
     :branch => 'fix_postgresql_version'
-mod 'puppet-redis', '11.0.0'
-mod 'puppet-rabbitmq',
-    :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',
-    :branch => 'fix_systemd_version'
-mod 'puppet-archive', '7.1.0'
-mod 'puppet-erlang',
-    :git => 'https://github.com/mj/puppet-erlang.git',
-    :branch => 'master'
+# mod 'puppet-redis', '11.0.0'
+# mod 'puppet-rabbitmq',
+#     :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',
+#     :branch => 'fix_systemd_version'
+# mod 'puppet-archive', '7.1.0'
+# mod 'puppet-erlang',
+#     :git => 'https://github.com/mj/puppet-erlang.git',
+#     :branch => 'master'
 # mod 'yelp-uchiwa', '2.1.0'
 # mod 'puppet/puppetboard', '10.0.0'
 # mod 'puppet-epel', '5.0.0'

@@ -1,5 +1,5 @@
 ---
-server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl' ]
+server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl', 'htop']
 
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::encryption_key: 'prueba dos'
@@ -7,15 +7,13 @@ puppet::server::github_ssh_key: 'test'
 puppet::server::working_directory: '/etc/puppetlabs/puppet'
 puppet::server::use_puppet_db: false
 puppet::repository::branch: 'master'
-
-profile::configurations::puppet::db::listen_port: 8081
-profile::configurations::puppet::db::ssl_listen_port: 8082
-
-profile::configurations::puppet::dashboard::listen_port: 443
-profile::configurations::puppet::dashboard::puppet_db_listen_port: "%{hiera('profile::configurations::puppet::db::ssl_listen_port')}"
+puppet::server::db_hostname: "%{hiera('puppet::dashboard::puppet_db_server')}"
 
 puppet::dashboard::puppetdb::port: 8081
 puppet::dashboard::puppetdb::ssl_port: 8082
+puppet::dashboard::listen_port: 443
+puppet::dashboard::puppetdb::puppet_db_listen_port: "%{hiera('puppet::dashboard::puppetdb::ssl_port')}"
+puppet::dashboard::puppetdb::puppet_db_server: "%{hiera('puppet::dashboard::puppet_db_server')}"
 
 puppet::agent::version: '6.0.2'
 puppet::agent::runinterval: 1200
@@ -31,13 +29,6 @@ sensu::client::linux_version: '1.7.0'
 sensu::client::redhat_version: '1.5.0'
 sensu::client::windows_version: '0.27.1-2'
 
-sensu::rabbitmq::erlang_version: 'R16B-03.18.el7'
-sensu::rabbitmq::vhost: '/sensu'
-sensu::redis::version: '5:5.0.7-2ubuntu0.1'
-sensu::redis::port: 6379
-
-sensu::uchiwa::version: '1.3.1-1'
-
 sensu::agent::enabled: true
 sensu::metrics::enable: "%{hiera('sensu::agent::enabled')}"
 sensu::client::subscriptions: [ 'sensu' ]
@@ -50,13 +41,10 @@ sensu::default_refresh: 10
 sensu::directory: '/var/sensu'
 
 sensu::linux_ruby_path: '/opt/sensu/embedded/bin/'
-sensu::windows_ruby_path: 'C:\\opt\\sensu\\embedded\\bin\\'
 
 users::cloudops_team:
   marcos.gabilondo:
     ensure: 'present'
     ssh_key_type: rsa
-    ssh_key:
-      - AAAAB3NzaC1yc2EAAAADAQABAAACAQC249wVfe6ci/QnnZGwJUIeVOT9xmidLnvyl9XXuzHxNUA9XM8t6UslXb92g8n0ihGrvz4bkNdU1KcBYDklks4TBDpFcvHV01PNdLe4FgPxk5bMScsMc9IkXWcAaFJHyF7VcUdvnjwNGhOUQQiPECITlRTW82Hd8n1pZqTXzP2pKGSVP5Xp2LEw0Mv6W+pGIdT9UY0VP2prBERrle7BE3eRYxhBK57eUk4W8K24hljA5/DWbLAlafX59VfsNs5LMDhwa7f42f8yowC2gy0m728W/m9wAnW+j42IGxYUaFTjUSt0kLkccamt87UYSPxQSh/CqcK9UPPrfSDc0j2TGR7DvR74XRe1dzHZZnrLTiRVR7glX+W4+Oiv5HnymcZ6qDIGsouzKHlm79X9wunK1P0D8MGNv2EHOfZxjXLpHdWz9PleDDPPy28YpLjLwm5fdXDKi4Wzkpb9k+q8t4v/Ymaqk95dICoNdGDfevDcmudHiIVxezgzjmjKzhnqzjzwh7AcMi0ktU3n0b6rpxcT108mwULpTh2qxWBhSNsz5m3/VaFuwr+0AC2QNX5ENizdZGU4R5yc8nd5oiHbHcdMoEwGPAJuQvkTSCIqJfumUvjUwekIK3kfmGa/V7pkvl6EjLCE3txCpAbpdYtlpt3xUbN1qlXbMICZpKLmKidFKs0IwQ==
-    groups: 
-      - sudo
+    ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAACAQC249wVfe6ci/QnnZGwJUIeVOT9xmidLnvyl9XXuzHxNUA9XM8t6UslXb92g8n0ihGrvz4bkNdU1KcBYDklks4TBDpFcvHV01PNdLe4FgPxk5bMScsMc9IkXWcAaFJHyF7VcUdvnjwNGhOUQQiPECITlRTW82Hd8n1pZqTXzP2pKGSVP5Xp2LEw0Mv6W+pGIdT9UY0VP2prBERrle7BE3eRYxhBK57eUk4W8K24hljA5/DWbLAlafX59VfsNs5LMDhwa7f42f8yowC2gy0m728W/m9wAnW+j42IGxYUaFTjUSt0kLkccamt87UYSPxQSh/CqcK9UPPrfSDc0j2TGR7DvR74XRe1dzHZZnrLTiRVR7glX+W4+Oiv5HnymcZ6qDIGsouzKHlm79X9wunK1P0D8MGNv2EHOfZxjXLpHdWz9PleDDPPy28YpLjLwm5fdXDKi4Wzkpb9k+q8t4v/Ymaqk95dICoNdGDfevDcmudHiIVxezgzjmjKzhnqzjzwh7AcMi0ktU3n0b6rpxcT108mwULpTh2qxWBhSNsz5m3/VaFuwr+0AC2QNX5ENizdZGU4R5yc8nd5oiHbHcdMoEwGPAJuQvkTSCIqJfumUvjUwekIK3kfmGa/V7pkvl6EjLCE3txCpAbpdYtlpt3xUbN1qlXbMICZpKLmKidFKs0IwQ==
+    groups: ['sudo']
