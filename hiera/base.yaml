@@ -22,6 +22,10 @@ puppet::agent::enabled: false
 
 linux_security::enable_ssh_only_logins: true
 
+sensu::server::version: 6.11.0-7218
+sensu::server::webui_admin_password: adminadmin
+sensu::server::agent_entity_config_password: marcosmarcos
+
 sensu::server::log_level: warn
 sensu::client::log_level: warn
 

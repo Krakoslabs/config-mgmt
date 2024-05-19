@@ -41,4 +41,5 @@ class profile::applications::puppet::dashboard(
     ],
     net     => 'host',
   }
+
 }

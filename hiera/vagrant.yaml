@@ -2,7 +2,7 @@
 puppet::server::address: 'puppetserver.vagrant.local'
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::certificate_name: 'puppetserver.vagrant.local'
-puppet::server::use_puppet_db: true
+puppet::server::use_puppet_db: false
 
 
 puppet::dashboard::puppet_db_server: 'ubuntu20-1.vagrant.local'
