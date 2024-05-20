@@ -26,6 +26,7 @@ mod 'puppetlabs-docker', '9.1.0'
 mod 'sensu-sensu',
     :git => 'https://github.com/Krakoslabs/sensu-puppet.git',
     :branch => 'fix_postgresql_version'
+mod 'puppet-rvm', '3.0.0'
 # mod 'puppet-redis', '11.0.0'
 # mod 'puppet-rabbitmq',
 #     :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',

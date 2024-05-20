@@ -1,15 +1,25 @@
 class profile::configurations::sensu::server (
   $version                      = hiera('sensu::server::version', 'installed'),
-  $webui_admin_password         = hiera('sensu::server::webui_admin_password', 'adminadmin'),
+  $password                     = hiera('sensu::server::password', 'adminadmin'),
   $agent_entity_config_password = hiera('sensu::server::agent_entity_config_password', 'P@ssw0rd!'),
-  # $enable_metrics             = hiera('sensu::metrics::enable', false)
+  $subscriptions                = hiera('sensu::agent::subscriptions', []),
+  $namespace                    = hiera('sensu::server::namespace', 'sensu-system'),
+  $validate_namespaces          = hiera('sensu::server::validate_namespaces', true),
+  $api_host                     = hiera('sensu::server::api_host', $::fqdn),
+  $api_port                     = hiera('sensu::server::api_port', '8080'),
 ){
 
   # include ::profile::applications::sensu::server
   class { '::profile::applications::sensu::server':
     version                      => $version,
-    webui_admin_password         => $webui_admin_password,
-    agent_entity_config_password => $agent_entity_config_password
+    password                     => $password,
+    agent_entity_config_password => $agent_entity_config_password,
+    backends                     => $backends,
+    subscriptions                => $subscriptions,
+    namespace                    => $namespace,
+    validate_namespaces          => $validate_namespaces,
+    api_host                     => $api_host,
+    api_port                     => $api_port,
   }
 
   # include ::profile::configurations::sensu::checks::host

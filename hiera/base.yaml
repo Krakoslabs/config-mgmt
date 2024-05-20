@@ -23,19 +23,28 @@ puppet::agent::enabled: false
 linux_security::enable_ssh_only_logins: true
 
 sensu::server::version: 6.11.0-7218
-sensu::server::webui_admin_password: adminadmin
+sensu::server::password: adminadmin
 sensu::server::agent_entity_config_password: marcosmarcos
+sensu::server::namespace: sensu-system
+sensu::server::validate_namespaces: false
+sensu::server::api_port: 8080
 
 sensu::server::log_level: warn
 sensu::client::log_level: warn
+sensu::agent::agent_entity_config_password: "%{hiera('sensu::server::agent_entity_config_password')}"
+sensu::agent::agent_password: "%{hiera('sensu::server::password')}"
 
-sensu::client::linux_version: '1.7.0'
-sensu::client::redhat_version: '1.5.0'
-sensu::client::windows_version: '0.27.1-2'
+
+sensu::agent::linux_version: "%{hiera('sensu::server::version')}"
+# sensu::agent::redhat_version: '1.5.0'
+# sensu::agent::windows_version: '0.27.1-2'
+
+sensu::agent::namespace: default
+sensu::agent::subscriptions: [ 'sensu' ]
 
 sensu::agent::enabled: true
+
 sensu::metrics::enable: "%{hiera('sensu::agent::enabled')}"
-sensu::client::subscriptions: [ 'sensu' ]
 sensu::default_check_handlers: [ 'debug' ]
 sensu::default_metric_handlers: [ 'metrics' ]
 sensu::default_interval: 60
@@ -44,7 +53,7 @@ sensu::default_occurrences: 5
 sensu::default_refresh: 10
 sensu::directory: '/var/sensu'
 
-sensu::linux_ruby_path: '/opt/sensu/embedded/bin/'
+sensu::linux_ruby_path: '/opt/sensu-plugins-ruby/embedded/bin/'
 
 users::cloudops_team:
   marcos.gabilondo:

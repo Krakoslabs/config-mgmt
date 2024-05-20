@@ -1,6 +1,10 @@
 FORGE
   remote: https://forge.puppetlabs.com
   specs:
+    golja-gnupg (1.2.3)
+    puppet-rvm (3.0.0)
+      golja-gnupg (>= 1.2.0, < 2.0.0)
+      puppetlabs-stdlib (>= 4.13.0, < 10.0.0)
     puppet-systemd (7.0.0)
       puppetlabs-inifile (>= 1.6.0, < 7.0.0)
       puppetlabs-stdlib (>= 8.5.0, < 10.0.0)
@@ -86,6 +90,7 @@ DEPENDENCIES
   krk-puppet_server (>= 0)
   krk-puppetagent (>= 0)
   krk-role (>= 0)
+  puppet-rvm (= 3.0.0)
   puppet-systemd (= 7.0.0)
   puppetlabs-apt (= 9.4.0)
   puppetlabs-concat (= 9.0.2)
