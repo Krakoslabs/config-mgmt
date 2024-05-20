@@ -1,5 +1,6 @@
 class profile::applications::sensu::server(
   $password,
+  $agent_password,
   $version,
   $agent_entity_config_password,
   $backends,
@@ -8,6 +9,7 @@ class profile::applications::sensu::server(
   $namespace,
   $api_host,
   $api_port,
+  $sensu_agent_enabled
 ) {
 
   $extra_subscriptions=[downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
@@ -15,6 +17,7 @@ class profile::applications::sensu::server(
 
   class { '::sensu':
     password                     => $password,
+    agent_password               => $agent_password,
     agent_entity_config_password => $agent_entity_config_password,
     version                      => $version,
     validate_namespaces          => $validate_namespaces,
@@ -24,12 +27,15 @@ class profile::applications::sensu::server(
   # TODO: Update sensu::backend class
   include ::sensu::backend
 
-  include sensu::cli
+  if $sensu_agent_enabled {
+    include sensu::cli
 
-  class { '::sensu::agent':
-    backends       => $backends,
-    subscriptions  => $extra_subscriptions,
-    namespace      => $namespace,
+    class { '::sensu::agent':
+      backends        => $backends,
+      subscriptions   => $extra_subscriptions,
+      namespace       => $namespace,
+      entity_name     => $::certname
+    }
   }
 
 }

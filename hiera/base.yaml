@@ -23,8 +23,10 @@ puppet::agent::enabled: false
 linux_security::enable_ssh_only_logins: true
 
 sensu::server::version: 6.11.0-7218
+# TODO: What these vars are usign for
 sensu::server::password: adminadmin
-sensu::server::agent_entity_config_password: marcosmarcos
+sensu::server::agent_entity_config_password: adminadmin
+sensu::server::agent_password: "%{hiera('sensu::server::password')}"
 sensu::server::namespace: sensu-system
 sensu::server::validate_namespaces: false
 sensu::server::api_port: 8080
@@ -33,6 +35,10 @@ sensu::server::log_level: warn
 sensu::client::log_level: warn
 sensu::agent::agent_entity_config_password: "%{hiera('sensu::server::agent_entity_config_password')}"
 sensu::agent::agent_password: "%{hiera('sensu::server::password')}"
+sensu::agent::validate_namespaces: "%{hiera('sensu::server::validate_namespaces')}"
+# TODO: What these vars are usign for
+sensu::agent::validate_api: true
+sensu::agent::validate_entity: true
 
 
 sensu::agent::linux_version: "%{hiera('sensu::server::version')}"

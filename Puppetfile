@@ -8,7 +8,7 @@ forge "https://forge.puppetlabs.com"
 mod 'krk-profile', :path => 'profile'
 mod 'krk-role', :path => 'role'
 mod 'krk-facts', :path => 'custom_modules/facts'
-# mod 'krk-sensu_configuration', :path => 'custom_modules/sensu_configuration'
+mod 'krk-sensu_configuration', :path => 'custom_modules/sensu_configuration'
 mod 'krk-puppetagent', :path => 'custom_modules/puppetagent'
 mod 'krk-puppet_server', :path => 'custom_modules/puppet_server'
 mod 'krk-linux_security', :path => 'custom_modules/linux_security'

@@ -7,6 +7,9 @@ class profile::configurations::sensu::agent (
   $api_port                     = hiera('sensu::server::api_port'),
   $agent_entity_config_password = hiera('sensu::agent::agent_entity_config_password'),
   $agent_password               = hiera('sensu::agent::agent_password'),
+  $validate_namespaces          = hiera('sensu::agent::validate_namespaces'),
+  $validate_api                 = hiera('sensu::agent::validate_api'),
+  $validate_entity              = hiera('sensu::agent::validate_entity')
 ){
 
   class { '::profile::applications::sensu::agent':
@@ -17,10 +20,13 @@ class profile::configurations::sensu::agent (
     api_host                     => $api_host,
     api_port                     => $api_port,
     agent_entity_config_password => $agent_entity_config_password,
-    agent_password               => $agent_password
+    agent_password               => $agent_password,
+    validate_namespaces          => $validate_namespaces,
+    validate_api                 => $validate_api,
+    validate_entity              => $validate_entity
   }
 
-  # include ::profile::configurations::sensu::checks::host
+  include ::profile::configurations::sensu::checks::host
 
   # if $enable_metrics {
   #   include ::profile::configurations::sensu::checks::metrics

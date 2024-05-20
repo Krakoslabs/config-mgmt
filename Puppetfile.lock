@@ -74,6 +74,11 @@ PATH
     krk-puppetagent (0.0.1)
 
 PATH
+  remote: custom_modules/sensu_configuration
+  specs:
+    krk-sensu_configuration (0.0.1)
+
+PATH
   remote: profile
   specs:
     krk-profile (0.0.1)
@@ -90,6 +95,7 @@ DEPENDENCIES
   krk-puppet_server (>= 0)
   krk-puppetagent (>= 0)
   krk-role (>= 0)
+  krk-sensu_configuration (>= 0)
   puppet-rvm (= 3.0.0)
   puppet-systemd (= 7.0.0)
   puppetlabs-apt (= 9.4.0)
