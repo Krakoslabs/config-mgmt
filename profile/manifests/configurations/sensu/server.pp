@@ -1,17 +1,17 @@
 class profile::configurations::sensu::server (
   $version                      = hiera('sensu::server::version', 'installed'),
-  $password                     = hiera('sensu::server::password', 'adminadmin'),
-  $agent_password               = hiera('sensu::server::agent_password', 'adminadmin'),
-  $agent_entity_config_password = hiera('sensu::server::agent_entity_config_password', 'P@ssw0rd!'),
+  $password                     = hiera('sensu::server::password', undef),
+  $agent_password               = hiera('sensu::server::agent_password', undef),
+  $agent_entity_config_password = hiera('sensu::server::agent_entity_config_password', undef),
   $subscriptions                = hiera('sensu::agent::subscriptions', []),
   $namespace                    = hiera('sensu::server::namespace', 'sensu-system'),
   $validate_namespaces          = hiera('sensu::server::validate_namespaces', true),
   $api_host                     = hiera('sensu::server::api_host', $::fqdn),
   $api_port                     = hiera('sensu::server::api_port', '8080'),
+  $use_ssl                      = hiera('sensu::server::use_ssl', false),
   $sensu_agent_enabled          = hiera('sensu::agent::enabled', false),
 ){
 
-  # include ::profile::applications::sensu::server
   class { '::profile::applications::sensu::server':
     version                      => $version,
     password                     => $password,
@@ -23,6 +23,7 @@ class profile::configurations::sensu::server (
     validate_namespaces          => $validate_namespaces,
     api_host                     => $api_host,
     api_port                     => $api_port,
+    use_ssl                      => $use_ssl,
     sensu_agent_enabled          => $sensu_agent_enabled
   }
 

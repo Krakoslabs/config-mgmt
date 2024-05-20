@@ -18,13 +18,13 @@ class profile::configurations::sensu::checks::host {
   #   ruby_path => $ruby_path,
   # }
 
-  # class { '::profile::configurations::sensu::checks::host::load':
-  #   ruby_path => $ruby_path,
-  # }
+  class { '::profile::configurations::sensu::checks::host::load':
+    ruby_path => $ruby_path,
+  }
 
-  # class { '::profile::configurations::sensu::checks::host::memory':
-  #   ruby_path => $ruby_path,
-  # }
+  class { '::profile::configurations::sensu::checks::host::memory':
+    ruby_path => $ruby_path,
+  }
 
   # class { '::profile::configurations::sensu::checks::host::puppet':
   #   ruby_path => $ruby_path,

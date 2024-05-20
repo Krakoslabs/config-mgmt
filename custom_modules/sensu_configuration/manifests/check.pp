@@ -1,6 +1,7 @@
 define sensu_configuration::check(
-  $command,
   $ensure            = 'present',
+  $command,
+  $provider          = 'sensu_api',
   $custom_message    = undef,
   $slack_channel     = undef,
   $teams_webhook     = undef,
@@ -65,10 +66,10 @@ define sensu_configuration::check(
   #   provider      => 'sensu_api',
   # }
 
-  sensu_check { $title:
+  sensu_check { "${title}-${facts['fqdn']}":
     ensure      => $ensure,
     command     => $command,
-    provider    => 'sensu_api',
+    provider    => $provider,
     subscriptions => ["entity:${facts['certname']}"],
     # custom      => $custom,
     # handlers    => $handler,
