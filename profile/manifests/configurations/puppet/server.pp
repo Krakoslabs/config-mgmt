@@ -10,6 +10,8 @@ class profile::configurations::puppet::server (
   $certificate_name      = hiera('puppet::server::certificate_name', 'puppetserver.vagrant.local'),
 ) {
 
+  $sensu = hiera('sensu::agent::enabled')
+
   if $facts['fqdn'] == 'puppetserver.vagrant.local' {
     $environment = 'vagrant'
   } else {
@@ -29,6 +31,7 @@ class profile::configurations::puppet::server (
     ssh_key_content      => $ssh_key_content,
   }
 
-  # include ::profile::configurations::sensu::checks::host::puppet_server
-
+  if $sensu {
+    include ::profile::configurations::sensu::checks::host::puppet_server
+  }
 }

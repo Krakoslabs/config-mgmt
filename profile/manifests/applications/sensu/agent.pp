@@ -14,8 +14,8 @@ class profile::applications::sensu::agent(
   $validate_entity,
 ){
 
-  $extra_subscriptions = [downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
-  $combine_subscriptions = union($subscriptions, $extra_subscriptions)
+  # $extra_subscriptions = [downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
+  # $combine_subscriptions = union($subscriptions, $extra_subscriptions)
 
   class { '::sensu':
     api_host                     => $api_host,
@@ -31,11 +31,11 @@ class profile::applications::sensu::agent(
   include ::sensu::cli
   class { '::sensu::agent':
     backends        => $backends,
-    subscriptions   => $combine_subscriptions,
+    subscriptions   => ["entity:${trusted['certname']}"],
     version         => $version,
     namespace       => $namespace,
     validate_entity => $validate_entity,
-    entity_name     => $::certname,
+    entity_name     => $trusted['certname'],
     agent_entity_config_provider => 'sensu_api'
   }
 }

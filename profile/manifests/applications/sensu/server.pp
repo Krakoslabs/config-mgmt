@@ -13,8 +13,8 @@ class profile::applications::sensu::server(
   $sensu_agent_enabled
 ) {
 
-  $extra_subscriptions=[downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
-  $combine_subscriptions = union($subscriptions, $extra_subscriptions)
+  # $extra_subscriptions=[downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
+  # $combine_subscriptions = union($subscriptions, $extra_subscriptions)
 
   class { '::sensu':
     password                     => $password,
@@ -33,11 +33,12 @@ class profile::applications::sensu::server(
 
     class { '::sensu::agent':
       backends        => $backends,
-      subscriptions   => $extra_subscriptions,
+      subscriptions   => ["entity:${trusted['certname']}"],
       namespace       => $namespace,
-      entity_name     => $::certname,
+      entity_name     => $trusted['certname'],
     }
     include ::profile::configurations::sensu::checks::host
+    include ::profile::configurations::sensu::checks::host::sensu_agent
 
   }
 

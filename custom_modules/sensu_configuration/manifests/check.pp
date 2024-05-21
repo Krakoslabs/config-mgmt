@@ -66,11 +66,11 @@ define sensu_configuration::check(
   #   provider      => 'sensu_api',
   # }
 
-  sensu_check { "${title}-${facts['fqdn']}":
+  sensu_check { "${title}-${trusted['certname']}":
     ensure      => $ensure,
     command     => $command,
     provider    => $provider,
-    subscriptions => ["entity:${facts['certname']}"],
+    subscriptions => ["entity:${trusted['certname']}"],
     # custom      => $custom,
     # handlers    => $handler,
     interval    => $interval + seeded_rand($interval_rand_max, $title),

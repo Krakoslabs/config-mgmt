@@ -15,6 +15,7 @@ class profile::configurations::base::linux::base (
 
   if $sensu {
     ensure_resource('Class', '::profile::configurations::sensu::agent', { })
+    include ::profile::configurations::sensu::checks::host::sensu_agent
   }
 
 }
