@@ -1,4 +1,4 @@
-class profile::configurations::sensu::checks::host {
+class profile::configurations::sensu::checks::host{
 
   case downcase($::osfamily) {
     'windows': {

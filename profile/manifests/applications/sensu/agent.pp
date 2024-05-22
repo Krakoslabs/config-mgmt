@@ -16,7 +16,6 @@ class profile::applications::sensu::agent(
 
   # $extra_subscriptions = [downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
   # $combine_subscriptions = union($subscriptions, $extra_subscriptions)
-
   class { '::sensu':
     api_host                     => $api_host,
     api_port                     => $api_port,
@@ -29,6 +28,9 @@ class profile::applications::sensu::agent(
   }
 
   include ::sensu::cli
+  sensu_namespace { $namespace:
+    ensure => 'present',
+  }
   class { '::sensu::agent':
     backends        => $backends,
     subscriptions   => ["entity:${trusted['certname']}"],
@@ -36,6 +38,6 @@ class profile::applications::sensu::agent(
     namespace       => $namespace,
     validate_entity => $validate_entity,
     entity_name     => $trusted['certname'],
-    agent_entity_config_provider => 'sensu_api'
+    agent_entity_config_provider => 'sensu_api',
   }
 }

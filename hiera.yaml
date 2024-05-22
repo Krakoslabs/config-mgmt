@@ -1,5 +1,6 @@
 ---
 :backends:
+## TODO: (2024-06-01): Enable hiera encryption values
 #  - eyaml
   - yaml
 

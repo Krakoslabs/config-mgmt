@@ -1,5 +1,6 @@
 ---
 server_config::linux::systemtools: [ 'bzip2','lsof','strace','telnet','traceroute','wget','zip','curl', 'htop']
+server_config::ntp::servers: [ '3.es.pool.ntp.org','1.europe.pool.ntp.org', '2.europe.pool.ntp.org','3.europe.pool.ntp.org']
 
 puppet::server::allowed_domains: '*vagrant.local'
 puppet::server::encryption_key: 'prueba dos'
@@ -33,14 +34,13 @@ sensu::server::api_port: 8080
 sensu::server::use_ssl: false
 
 
-sensu::agent::namespace: default
+sensu::agent::namespace: "%{::environment}"
 sensu::agent::subscriptions: [ 'sensu' ]
 sensu::agent::log_level: warn
 sensu::agent::password: "%{hiera('sensu::server::password')}"
 sensu::agent::agent_password: "%{hiera('sensu::server::password')}"
 sensu::agent::agent_entity_config_password: "%{hiera('sensu::server::password')}"
 sensu::agent::validate_namespaces: "%{hiera('sensu::server::validate_namespaces')}"
-# TODO: What these vars are usign for
 sensu::agent::validate_api: true
 sensu::agent::validate_entity: true
 sensu::agent::use_ssl: "%{hiera('sensu::server::use_ssl')}"

@@ -26,11 +26,14 @@ class profile::applications::sensu::server(
     api_port                     => $api_port,
     use_ssl                      => $use_ssl,
   }
-  # TODO: Update sensu::backend class
+  ## TODO: (2024-06-01): Update sensu::backend class
   include ::sensu::backend
 
   if $sensu_agent_enabled {
 
+    sensu_namespace { $namespace:
+      ensure => 'present',
+    }
     class { '::sensu::agent':
       backends        => $backends,
       subscriptions   => ["entity:${trusted['certname']}"],
@@ -38,7 +41,6 @@ class profile::applications::sensu::server(
       entity_name     => $trusted['certname'],
     }
     include ::profile::configurations::sensu::checks::host
-    include ::profile::configurations::sensu::checks::host::sensu_agent
 
   }
 

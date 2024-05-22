@@ -11,6 +11,7 @@ define sensu_configuration::check(
   $interval_rand_max = hiera('sensu::default_interval_rand_max'),
   $occurrences       = hiera('sensu::default_occurrences'),
   $refresh           = hiera('sensu::default_refresh'),
+  $namespace         = hiera('sensu::agent::namespace')
 ) {
 
   ensure_resource('Class', 'sensu_configuration::plugins::base', { })
@@ -67,18 +68,18 @@ define sensu_configuration::check(
   # }
 
   sensu_check { "${title}-${trusted['certname']}":
-    ensure      => $ensure,
-    command     => $command,
-    provider    => $provider,
+    ensure        => $ensure,
+    command       => $command,
+    provider      => $provider,
     subscriptions => ["entity:${trusted['certname']}"],
     # custom      => $custom,
     # handlers    => $handler,
-    interval    => $interval + seeded_rand($interval_rand_max, $title),
+    interval      => $interval + seeded_rand($interval_rand_max, $title),
     # occurrences => $occurrences,
     # refresh     => $refresh,
-    notify      => Service['sensu-agent'],
-    require     => Class['sensu_configuration::plugins::base'],
-    namespace   => 'default'
+    notify        => Service['sensu-agent'],
+    require       => Class['sensu_configuration::plugins::base'],
+    namespace     => $namespace
   }
 
 }

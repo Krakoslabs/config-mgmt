@@ -4,12 +4,15 @@ class profile::configurations::sensu::server (
   $agent_password               = hiera('sensu::server::agent_password', undef),
   $agent_entity_config_password = hiera('sensu::server::agent_entity_config_password', undef),
   $subscriptions                = hiera('sensu::agent::subscriptions', []),
-  $namespace                    = hiera('sensu::server::namespace', 'sensu-system'),
+  $namespace                    = hiera('sensu::agent::namespace', 'default'),
   $validate_namespaces          = hiera('sensu::server::validate_namespaces', true),
   $api_host                     = hiera('sensu::server::api_host', $::fqdn),
   $api_port                     = hiera('sensu::server::api_port', '8080'),
   $use_ssl                      = hiera('sensu::server::use_ssl', false),
   $sensu_agent_enabled          = hiera('sensu::agent::enabled', false),
+  $backends                     = hiera('sensu::server::backends', []),
+  $validate_api                 = hiera('sensu::agent::validate_api'),
+  $validate_entity              = hiera('sensu::agent::validate_entity')
 ){
 
   class { '::profile::applications::sensu::server':

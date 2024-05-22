@@ -20,18 +20,18 @@ if which puppet > /dev/null 2>&1; then
   exit 0
 fi
 
-
+## TODO: (2024-06-01): Implement me...
 function install_centos (){
-  writeLog "Updating centos machine...."
-  #yum -y update
-  writeLog "Installing wget..."
-  yum install -y wget >/dev/null
+  # writeLog "Updating centos machine...."
+  # #yum -y update
+  # writeLog "Installing wget..."
+  # yum install -y wget >/dev/null
 
-  writeLog "Configuring PuppetLabs repo..."
-  yum -y install https://yum.puppetlabs.com/puppet6/el/7/x86_64/puppet6-release-6.0.0-4.el7.noarch.rpm > /dev/null
+  # writeLog "Configuring PuppetLabs repo..."
+  # yum -y install https://yum.puppetlabs.com/puppet6/el/7/x86_64/puppet6-release-6.0.0-4.el7.noarch.rpm > /dev/null
 
-  writeLog "Installing Puppet Agent..."
-  yum install -y puppet-agent-6.0.2 > /dev/null
+  # writeLog "Installing Puppet Agent..."
+  # yum install -y puppet-agent-6.0.2 > /dev/null
 }
 
 # Check me if I work

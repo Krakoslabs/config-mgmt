@@ -6,6 +6,7 @@ class profile::configurations::base::linux::base (
   include ::profile::configurations::base::default_directory
   include ::profile::configurations::base::linux::common::locales
   include ::profile::configurations::base::linux::common::systemtools
+  include ::profile::configurations::base::linux::common::ntp
 
   include ::profile::configurations::base::linux::security
 
@@ -15,7 +16,6 @@ class profile::configurations::base::linux::base (
 
   if $sensu {
     ensure_resource('Class', '::profile::configurations::sensu::agent', { })
-    include ::profile::configurations::sensu::checks::host::sensu_agent
   }
 
 }

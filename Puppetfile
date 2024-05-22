@@ -21,12 +21,15 @@ mod 'puppetlabs-puppetdb', '8.1.0'
 mod 'puppetlabs-postgresql', '10.3.0'
 mod 'puppet-systemd', '7.0.0'
 mod 'puppetlabs-apt', '9.4.0'
+mod 'puppetlabs-ntp', '10.1.0'
 mod 'puppetlabs-docker', '9.1.0'
-## Use the default module when this PR will merge: https://github.com/sensu/sensu-puppet/pull/1339
+## TODO: (2024-06-01): Use the latest version module when this PR will merge: https://github.com/sensu/sensu-puppet/pull/1339
 mod 'sensu-sensu',
     :git => 'https://github.com/Krakoslabs/sensu-puppet.git',
     :branch => 'fix_postgresql_version'
 mod 'puppet-rvm', '3.0.0'
+mod 'puppetlabs-influxdb', '2.4.0'
+mod 'puppet-archive', '7.1.0'
 # mod 'puppet-redis', '11.0.0'
 # mod 'puppet-rabbitmq',
 #     :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',
