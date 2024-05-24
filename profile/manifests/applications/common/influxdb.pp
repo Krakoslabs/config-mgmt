@@ -20,7 +20,7 @@ class profile::applications::common::influxdb(
   class { '::influxdb':
     version         => $version,
     admin_user      => $admin_user,
-    admin_pass      => $admin_password,
+    admin_pass      => $admin_pass,
     host            => $host,
     port            => $port,
     use_ssl         => $use_ssl,
@@ -28,6 +28,10 @@ class profile::applications::common::influxdb(
     initial_org     => $influxdb_initial_org,
     initial_bucket  => $influxdb_initial_bucket
   }
+
+  # TODO: Example of influxdbv2 query from Dashboard
+  # from(bucket: "sensu")
+    # |> range(start: v.timeRangeStart, stop:v.timeRangeStop)
 
   # influxdb_org { $influxdb_initial_org:
   #   ensure  => present,

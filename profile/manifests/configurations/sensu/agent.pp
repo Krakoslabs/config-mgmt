@@ -12,7 +12,7 @@ class profile::configurations::sensu::agent (
   $validate_namespaces          = hiera('sensu::agent::validate_namespaces'),
   $validate_api                 = hiera('sensu::agent::validate_api'),
   $validate_entity              = hiera('sensu::agent::validate_entity'),
-  $enable_metrics               = hiera('sensu::metrics::enable', false)
+  $sensu_metrics_enabled        = hiera('sensu::metrics::enabled', false)
 ){
 
   class { '::profile::applications::sensu::agent':
@@ -33,7 +33,7 @@ class profile::configurations::sensu::agent (
 
   include ::profile::configurations::sensu::checks::host
 
-  if $enable_metrics {
+  if $sensu_metrics_enabled {
     include ::profile::configurations::sensu::checks::metrics
   }
 }

@@ -28,7 +28,12 @@ class profile::applications::sensu::server(
     use_ssl                      => $use_ssl,
   }
   ## TODO: (2024-06-01): Update sensu::backend class
-  include ::sensu::backend
+  class { '::sensu::backend':
+    config_hash => {
+      'debug'     => false,
+      'log-level' => 'warn',
+    },
+  }
 
   sensu_namespace { $namespace:
     ensure => 'present',

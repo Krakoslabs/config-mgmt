@@ -1,6 +1,6 @@
 class profile::configurations::base::linux::base (
-  $sensu          = hiera('sensu::agent::enabled', false),
-  $puppetagent    = hiera('puppet::agent::enabled', false),
+  $sensu_agent_enabled = hiera('sensu::agent::enabled', false),
+  $puppetagent         = hiera('puppet::agent::enabled', false),
 ){
 
   include ::profile::configurations::base::default_directory
@@ -14,7 +14,7 @@ class profile::configurations::base::linux::base (
     include ::profile::configurations::puppet::agent
   }
 
-  if $sensu {
+  if $sensu_agent_enabled {
     ensure_resource('Class', '::profile::configurations::sensu::agent', { })
   }
 

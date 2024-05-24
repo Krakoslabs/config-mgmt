@@ -3,13 +3,13 @@ class profile::configurations::puppet::db (
   $ssl_listen_port = hiera('puppet::dashboard::puppetdb::ssl_port', 'puppetserver.vagrant.local'),
 ){
 
-  $sensu = hiera('sensu::agent::enabled')
+  $sensu_agent_enabled = hiera('sensu::agent::enabled')
 
   class { '::profile::applications::puppet::db':
     listen_port     => $listen_port,
     ssl_listen_port => $ssl_listen_port
   }
-  if $sensu {
+  if $sensu_agent_enabled {
     include ::profile::configurations::sensu::checks::host::puppet_db
   }
 }
