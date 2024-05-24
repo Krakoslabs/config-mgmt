@@ -14,10 +14,6 @@ class profile::configurations::sensu::checks::metrics {
     ruby_path => $ruby_path,
   }
 
-  # class { '::profile::configurations::sensu::checks::metrics::disk':
-  #   ruby_path => $ruby_path,
-  # }
-
   class { '::profile::configurations::sensu::checks::metrics::load':
     ruby_path => $ruby_path,
   }
@@ -25,6 +21,10 @@ class profile::configurations::sensu::checks::metrics {
   class { '::profile::configurations::sensu::checks::metrics::memory':
     ruby_path => $ruby_path,
   }
+
+  # class { '::profile::configurations::sensu::checks::metrics::disk':
+  #   ruby_path => $ruby_path,
+  # }
 
   # class { '::profile::configurations::sensu::checks::metrics::network':
   #   ruby_path => $ruby_path,

@@ -78,7 +78,7 @@ define sensu_configuration::check(
     # occurrences => $occurrences,
     # refresh     => $refresh,
     namespace     => $namespace,
-    require       => Class['sensu_configuration::plugins::base']
+    require       => Class['::sensu_configuration::plugins::base']
     # notify        => Service['sensu-agent']
   }
 

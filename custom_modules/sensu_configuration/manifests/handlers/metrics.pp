@@ -8,27 +8,30 @@ class sensu_configuration::handlers::metrics (
   $password     = hiera('sensu::influxdb::password', 'adminadminadminadmin'),
   $use_ssl      = hiera('sensu::influxdb::use_ssl', true),
   $namespace    = hiera('sensu::agent::namespace'),
-  $bucket = 'sensu',
+  $bucket       = 'sensu',
   $organization = 'appfire'
 ) {
 
   $addr = "https://${$host}:${port}"
   sensu_bonsai_asset { 'sensu/sensu-influxdb-handler':
-    ensure  => 'present',
-    version => '4.0.0',
+    ensure    => 'present',
+    version   => '4.0.0',
+    namespace => $namespace
   }
 
+  # TODO: Create an influxdb token for sensu
+  # TODO: Remove flag "--insecure-skip-verify" when it will be over https
   sensu_handler { $handler_name:
     ensure          => 'present',
     type            => 'pipe',
-    env_vars       => [
+    env_vars        => [
       "INFLUXDB_ADDR=${addr}",
       "INFLUXDB_BUCKET=${bucket}",
       "INFLUXDB_ORG=${organization}",
-      "INFLUXDB_TOKEN=-g2edgXVH-Ru66TYjtOPlJFfHwXXeBRn8RFwfGEl0wltrnSzm2FnHalcQQKUjf8UqkrP84pR5wvA1WBMPYs0Ag=="
+      "INFLUXDB_TOKEN=rlZkfsHI03fy5xCjPNWjpdII-yErSCvHDPZvy9OUsfymkSJnwUzC6fUo6Z4CZ0E6-G2h4g4OZyYgD6t6DoaojQ=="
     ],
     namespace       => $namespace,
-    command         => "sensu-influxdb-handler",
+    command         => "sensu-influxdb-handler --insecure-skip-verify",
     runtime_assets  => ['sensu/sensu-influxdb-handler'],
     provider        => $provider,
     timeout         => $timeout
