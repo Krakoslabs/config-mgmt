@@ -77,9 +77,9 @@ define sensu_configuration::check(
     interval      => $interval + seeded_rand($interval_rand_max, $title),
     # occurrences => $occurrences,
     # refresh     => $refresh,
-    notify        => Service['sensu-agent'],
-    require       => Class['sensu_configuration::plugins::base'],
-    namespace     => $namespace
+    namespace     => $namespace,
+    require       => Class['sensu_configuration::plugins::base']
+    # notify        => Service['sensu-agent']
   }
 
 }

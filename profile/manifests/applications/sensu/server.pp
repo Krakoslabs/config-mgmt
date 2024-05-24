@@ -10,7 +10,8 @@ class profile::applications::sensu::server(
   $backends,
   $subscriptions,
   $namespace,
-  $sensu_agent_enabled
+  $sensu_agent_enabled,
+  $sensu_metrics_enabled
 ) {
 
   # $extra_subscriptions=[downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
@@ -29,11 +30,12 @@ class profile::applications::sensu::server(
   ## TODO: (2024-06-01): Update sensu::backend class
   include ::sensu::backend
 
+  sensu_namespace { $namespace:
+    ensure => 'present',
+  }
+
   if $sensu_agent_enabled {
 
-    sensu_namespace { $namespace:
-      ensure => 'present',
-    }
     class { '::sensu::agent':
       backends        => $backends,
       subscriptions   => ["entity:${trusted['certname']}"],
@@ -42,6 +44,11 @@ class profile::applications::sensu::server(
     }
     include ::profile::configurations::sensu::checks::host
 
+  }
+
+  if $sensu_metrics_enabled {
+    include ::sensu_configuration::handlers
+    include ::profile::configurations::sensu::checks::metrics
   }
 
 }

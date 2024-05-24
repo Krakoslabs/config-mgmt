@@ -33,7 +33,6 @@ sensu::server::validate_namespaces: true
 sensu::server::api_port: 8080
 sensu::server::use_ssl: false
 
-
 sensu::agent::namespace: "%{::environment}"
 sensu::agent::subscriptions: [ 'sensu' ]
 sensu::agent::log_level: warn
@@ -44,7 +43,6 @@ sensu::agent::validate_namespaces: "%{hiera('sensu::server::validate_namespaces'
 sensu::agent::validate_api: true
 sensu::agent::validate_entity: true
 sensu::agent::use_ssl: "%{hiera('sensu::server::use_ssl')}"
-
 
 sensu::agent::linux_version: "%{hiera('sensu::server::version')}"
 # sensu::agent::redhat_version: '1.5.0'
@@ -66,8 +64,8 @@ sensu::linux_ruby_path: '/opt/sensu-plugins-ruby/embedded/bin/'
 
 sensu::influxdb::version: 1.6.4-1
 sensu::influxdb::admin_user: admin
+## Password is not working. It uses default one: puppetlabs
 sensu::influxdb::admin_pass: adminadminadminadmin
-# sensu::influxdb::host:
 sensu::influxdb::port: 8086
 sensu::influxdb::initial_org: appfire
 sensu::influxdb::initial_bucket: sensu

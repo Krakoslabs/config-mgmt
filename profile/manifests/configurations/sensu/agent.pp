@@ -11,7 +11,8 @@ class profile::configurations::sensu::agent (
   $agent_entity_config_password = hiera('sensu::agent::agent_entity_config_password', undef),
   $validate_namespaces          = hiera('sensu::agent::validate_namespaces'),
   $validate_api                 = hiera('sensu::agent::validate_api'),
-  $validate_entity              = hiera('sensu::agent::validate_entity')
+  $validate_entity              = hiera('sensu::agent::validate_entity'),
+  $enable_metrics               = hiera('sensu::metrics::enable', false)
 ){
 
   class { '::profile::applications::sensu::agent':
@@ -32,7 +33,7 @@ class profile::configurations::sensu::agent (
 
   include ::profile::configurations::sensu::checks::host
 
-  # if $enable_metrics {
-  #   include ::profile::configurations::sensu::checks::metrics
-  # }
+  if $enable_metrics {
+    include ::profile::configurations::sensu::checks::metrics
+  }
 }

@@ -3,8 +3,8 @@ node 'puppetserver.vagrant.local' {
 }
 
 node 'ubuntu20-1.vagrant.local' {
-  # include ::role::infrastructure::puppet::dashboard
-  include ::role::infrastructure::monitoring::sensu::grafana
+  include ::role::infrastructure::puppet::dashboard
+  # include ::role::infrastructure::monitoring::sensu::grafana
 }
 
 node 'ubuntu20-2.vagrant.local' {

@@ -10,6 +10,7 @@ class profile::configurations::sensu::server (
   $api_port                     = hiera('sensu::server::api_port', '8080'),
   $use_ssl                      = hiera('sensu::server::use_ssl', false),
   $sensu_agent_enabled          = hiera('sensu::agent::enabled', false),
+  $sensu_metrics_enabled        = hiera('sensu::metrics::enabled', false),
   $backends                     = hiera('sensu::server::backends', []),
   $validate_api                 = hiera('sensu::agent::validate_api'),
   $validate_entity              = hiera('sensu::agent::validate_entity')
@@ -27,7 +28,8 @@ class profile::configurations::sensu::server (
     api_host                     => $api_host,
     api_port                     => $api_port,
     use_ssl                      => $use_ssl,
-    sensu_agent_enabled          => $sensu_agent_enabled
+    sensu_agent_enabled          => $sensu_agent_enabled,
+    sensu_metrics_enabled        => $sensu_metrics_enabled
   }
 
   # include ::profile::configurations::sensu::checks::host
@@ -35,10 +37,10 @@ class profile::configurations::sensu::server (
   # include ::profile::configurations::sensu::checks::host
   # include ::profile::configurations::sensu::metrics::base
   # if $enable_metrics {
-  #   include ::profile::configurations::sensu::checks::metrics
-  #   include ::sensu_configuration::extensions
-  #   include ::sensu_configuration::handlers
-  #   include ::sensu_configuration::plugins
+    # include ::profile::configurations::sensu::checks::metrics
+    # include ::sensu_configuration::extensions
+    # include ::sensu_configuration::handlers
+    # include ::sensu_configuration::plugins
   # }
 
   # include ::profile::configurations::consul::services::infrastructure::sensu
