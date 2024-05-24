@@ -22,7 +22,7 @@ fi
 
 ## TODO: (2024-06-01): Implement me...
 function install_centos (){
-  # writeLog "Updating centos machine...."
+  writeLog "Updating centos machine...."
   # #yum -y update
   # writeLog "Installing wget..."
   # yum install -y wget >/dev/null

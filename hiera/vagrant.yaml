@@ -19,3 +19,8 @@ sensu::agent::enabled: false
 
 sensu::server::backends: ['ubuntu20-2.vagrant.local:8081']
 sensu::server::api_host: ubuntu20-2.vagrant.local
+
+sensu::influxdb::version: 2.7.6-1
+sensu::influxdb::auth_enabled: false
+sensu::influxdb::data_dir: /var/lib/influxdb
+sensu::influxdb::host: ubuntu20-1.vagrant.local

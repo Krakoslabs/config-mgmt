@@ -30,6 +30,7 @@ mod 'sensu-sensu',
 mod 'puppet-rvm', '3.0.0'
 mod 'puppetlabs-influxdb', '2.4.0'
 mod 'puppet-archive', '7.1.0'
+mod 'puppet-grafana', '13.1.0'
 # mod 'puppet-redis', '11.0.0'
 # mod 'puppet-rabbitmq',
 #     :git => 'https://github.com/Krakoslabs/puppet-rabbitmq.git',
