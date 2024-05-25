@@ -28,9 +28,9 @@ class profile::applications::sensu::agent(
   }
 
   include ::sensu::cli
-  # sensu_namespace { $namespace:
-  #   ensure => 'present',
-  # }
+  sensu_namespace { $namespace:
+    ensure => 'present',
+  }
   class { '::sensu::agent':
     backends        => $backends,
     subscriptions   => ["entity:${trusted['certname']}"],

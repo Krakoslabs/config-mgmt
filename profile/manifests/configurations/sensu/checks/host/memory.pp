@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::host::memory(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure        = hiera('sensu::host_checks::memory::ensure', 'present'),
   $warning       = hiera('sensu::host_checks::memory::warning', 88),
   $critical      = hiera('sensu::host_checks::memory::critical', 95),
@@ -20,9 +20,9 @@ class profile::configurations::sensu::checks::host::memory(
     }
 
     default: {
-      sensu_configuration::check { 'check-memory-percent':
+      sensu_configuration::check { 'memory-checks':
         ensure        => $ensure,
-        command       => "${ruby_path}check-memory-percent.rb -w ${warning} -c ${critical}",
+        command       => "check-memory-percent.rb -w ${warning} -c ${critical}",
         handlers      => $handlers,
         slack_channel => $slack_channel,
         opsgenie_team => $opsgenie_team,

@@ -20,7 +20,7 @@ if which puppet > /dev/null 2>&1; then
   exit 0
 fi
 
-## TODO: (2024-06-01): Implement me...
+## TODO: (2024-06-01) - Implement me...
 function install_centos (){
   writeLog "Updating centos machine...."
   # #yum -y update

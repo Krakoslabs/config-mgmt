@@ -29,7 +29,7 @@ class profile::applications::common::influxdb(
     initial_bucket  => $influxdb_initial_bucket
   }
 
-  # TODO: Example of influxdbv2 query from Dashboard
+  # TODO: (2024-06-01) - Example of influxdbv2 query from Dashboard
   # from(bucket: "sensu")
     # |> range(start: v.timeRangeStart, stop:v.timeRangeStop)
 

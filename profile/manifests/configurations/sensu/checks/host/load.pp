@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::host::load(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure                  = hiera('sensu::host_checks::load::ensure', 'present'),
   $warning_percentage_win  = hiera('sensu::host_checks::load::warning', 80),
   $critical_percentage_win = hiera('sensu::host_checks::load::critical', 90),
@@ -19,9 +19,9 @@ class profile::configurations::sensu::checks::host::load(
     }
 
     default: {
-      sensu_configuration::check { 'check-load':
+      sensu_configuration::check { 'load-checks':
         ensure        => $ensure,
-        command       => "${ruby_path}check-load.rb -w ${warning_load_averages} -c ${critical_load_averages}",
+        command       => "check-load.rb -w ${warning_load_averages} -c ${critical_load_averages}",
         handlers      => $handlers,
         slack_channel => $slack_channel,
         opsgenie_team => $opsgenie_team,

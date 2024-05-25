@@ -14,7 +14,7 @@ define sensu_configuration::check(
   $namespace         = hiera('sensu::agent::namespace')
 ) {
 
-  ensure_resource('Class', 'sensu_configuration::plugins::base', { })
+  # ensure_resource('Class', 'sensu_configuration::plugins::base', { })
 
   if $handlers != undef {
     $handler = $handlers
@@ -67,6 +67,12 @@ define sensu_configuration::check(
   #   provider      => 'sensu_api',
   # }
 
+  # $extra_subscriptions = [downcase($::kernel), downcase($::environment), downcase($::os['architecture'])]
+  # $combine_subscriptions = union($subscriptions, $extra_subscriptions)
+  # $runtime_assets = union(['sensu/sensu-ruby-runtime', "sensu-plugins/sensu-plugins-${title}"])
+  # notice(" See the runtime array ${runtime}")
+  $title_array = split($title, '-')
+
   sensu_check { "${title}-${trusted['certname']}":
     ensure        => $ensure,
     command       => $command,
@@ -78,8 +84,9 @@ define sensu_configuration::check(
     # occurrences => $occurrences,
     # refresh     => $refresh,
     namespace     => $namespace,
-    require       => Class['::sensu_configuration::plugins::base']
-    # notify        => Service['sensu-agent']
+    runtime_assets  => ['sensu/sensu-ruby-runtime', "sensu-plugins/sensu-plugins-${$title_array[0]}-${$title_array[1]}"],
+    notify        => Service['sensu-agent'],
+    require       => Class['::sensu_configuration::assets::base']
   }
 
 }

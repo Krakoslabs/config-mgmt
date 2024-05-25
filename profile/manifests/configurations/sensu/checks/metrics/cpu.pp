@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::metrics::cpu(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure = hiera('sensu::metrics::cpu::ensure', 'present'),
 ) {
 
@@ -9,14 +9,14 @@ class profile::configurations::sensu::checks::metrics::cpu(
   {
     'windows':
       {
-        # TODO: implement me
+        # TODO: (2024-06-01) - implement me
       }
 
       default:
       {
-        sensu_configuration::metric { 'metrics-cpu':
+        sensu_configuration::metric { 'cpu-metrics':
           ensure  => $ensure,
-          command => "${ruby_path}metrics-cpu.rb --scheme ${prefix}",
+          command => "metrics-cpu.rb --scheme ${prefix}",
         }
       }
   }

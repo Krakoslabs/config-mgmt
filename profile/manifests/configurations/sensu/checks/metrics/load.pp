@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::metrics::load(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure = hiera('sensu::metrics::load::ensure', 'present'),
 ) {
 
@@ -17,9 +17,9 @@ class profile::configurations::sensu::checks::metrics::load(
 
       default:
       {
-        sensu_configuration::metric { 'metrics-load-averages':
+        sensu_configuration::metric { 'load-metrics':
           ensure  => $ensure,
-          command => "${ruby_path}metrics-load.rb --scheme ${prefix}",
+          command => "metrics-load.rb --scheme ${prefix}",
         }
       }
   }

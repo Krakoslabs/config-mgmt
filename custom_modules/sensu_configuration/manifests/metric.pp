@@ -10,7 +10,7 @@ define sensu_configuration::metric(
   $namespace         = hiera('sensu::agent::namespace')
 ) {
 
-  ensure_resource('Class', 'sensu_configuration::plugins::base', { })
+  # ensure_resource('Class', 'sensu_configuration::plugins::base', { })
 
   # sensuclassic::check { $title:
   #   ensure      => $ensure,
@@ -22,21 +22,23 @@ define sensu_configuration::metric(
   #   refresh     => $refresh,
   #   require     => Class['sensu_configuration::plugins::base'],
   # }
+  $title_array = split($title, '-')
 
-    sensu_check { "${title}-${trusted['certname']}":
-      ensure        => $ensure,
-      command       => $command,
-      provider      => $provider,
-      subscriptions => ["entity:${trusted['certname']}"],
-      output_metric_format   => 'influxdb_line',
-      output_metric_handlers => ['influxdb'],
-      interval      => $interval + seeded_rand($interval_rand_max, $title),
-      publish       => true,
-      # occurrences => $occurrences,
-      # refresh     => $refresh,
-      namespace     => $namespace,
-      notify        => Service['sensu-agent'],
-      require       => Class['sensu_configuration::plugins::base'],
+  sensu_check { "${title}-${trusted['certname']}":
+    ensure                 => $ensure,
+    command                => $command,
+    provider               => $provider,
+    subscriptions          => ["entity:${trusted['certname']}"],
+    output_metric_format   => 'influxdb_line',
+    output_metric_handlers => ['influxdb'],
+    interval               => $interval + seeded_rand($interval_rand_max, $title),
+    publish                => true,
+    runtime_assets         => ['sensu/sensu-ruby-runtime', "sensu-plugins/sensu-plugins-${$title_array[0]}-checks"],
+    # occurrences => $occurrences,
+    # refresh     => $refresh,
+    namespace              => $namespace,
+    notify                 => Service['sensu-agent'],
+    require                => Class['sensu_configuration::assets::base'],
   }
 
 }

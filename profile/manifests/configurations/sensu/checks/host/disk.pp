@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::host::disk(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure        = hiera('sensu::host_checks::disk::ensure', 'present'),
   $warning       = hiera('sensu::host_checks::disk::warning', 90),
   $critical      = hiera('sensu::host_checks::disk::critical', 95),
@@ -10,7 +10,7 @@ class profile::configurations::sensu::checks::host::disk(
 
   case downcase($::osfamily) {
     'windows': {
-      sensu_configuration::check { 'check-disk-usage':
+      sensu_configuration::check { 'disk-checks':
         ensure        => $ensure,
         command       => "${ruby_path}ruby.exe ${ruby_path}check-windows-disk.rb -w ${warning} -c ${critical} ${extra_params}",
         slack_channel => $slack_channel,
@@ -19,9 +19,9 @@ class profile::configurations::sensu::checks::host::disk(
     }
 
     default: {
-      sensu_configuration::check { 'check-disk-usage':
+      sensu_configuration::check { 'disk-checks':
         ensure        => $ensure,
-        command       => "${ruby_path}check-disk-usage.rb -w ${warning} -c ${critical} ${extra_params}",
+        command       => "check-disk-usage.rb -w ${warning} -c ${critical} ${extra_params}",
         slack_channel => $slack_channel,
         opsgenie_team => $opsgenie_team,
       }

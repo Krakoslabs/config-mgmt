@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::metrics::memory(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure = hiera('sensu::metrics::memory::ensure', 'present'),
 ) {
 
@@ -17,14 +17,9 @@ class profile::configurations::sensu::checks::metrics::memory(
 
       default:
       {
-        sensu_configuration::metric { 'metrics-memory':
+        sensu_configuration::metric { 'memory-metrics':
           ensure  => $ensure,
-          command => "${ruby_path}metrics-memory.rb --scheme ${prefix}",
-        }
-
-        sensu_configuration::metric { 'metrics-memory-percentage':
-          ensure  => $ensure,
-          command => "${ruby_path}metrics-memory-percent.rb --scheme ${prefix}.percent",
+          command => "metrics-memory-percent.rb --scheme ${prefix}.percent",
         }
       }
   }

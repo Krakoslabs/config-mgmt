@@ -12,6 +12,8 @@ class profile::configurations::databases::metrics::influxdb (
   $bucket_labels           = hiera('sensu::influxdb::bucket_labels', ['monitoring']),
 ) {
 
+  $sensu_agent_enabled = hiera('sensu::agent::enabled')
+
   class { '::profile::applications::common::influxdb':
     version                 => $version,
     admin_user              => $influxdb_admin_user,
@@ -26,9 +28,8 @@ class profile::configurations::databases::metrics::influxdb (
     influxdb_bucket_labels  => $influxdb_bucket_labels
   }
 
-  # $sensu = hiera('sensu::agent::enabled')
-  # if $sensu {
-  #   include ::profile::configurations::sensu::checks::host::influxdb
-  # }
+  if $sensu_agent_enabled {
+    include ::profile::configurations::sensu::checks::host::influxdb
+  }
 
 }

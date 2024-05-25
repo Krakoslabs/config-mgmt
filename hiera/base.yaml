@@ -78,16 +78,3 @@ users::cloudops_team:
     ssh_key_type: rsa
     ssh_key: AAAAB3NzaC1yc2EAAAADAQABAAACAQC249wVfe6ci/QnnZGwJUIeVOT9xmidLnvyl9XXuzHxNUA9XM8t6UslXb92g8n0ihGrvz4bkNdU1KcBYDklks4TBDpFcvHV01PNdLe4FgPxk5bMScsMc9IkXWcAaFJHyF7VcUdvnjwNGhOUQQiPECITlRTW82Hd8n1pZqTXzP2pKGSVP5Xp2LEw0Mv6W+pGIdT9UY0VP2prBERrle7BE3eRYxhBK57eUk4W8K24hljA5/DWbLAlafX59VfsNs5LMDhwa7f42f8yowC2gy0m728W/m9wAnW+j42IGxYUaFTjUSt0kLkccamt87UYSPxQSh/CqcK9UPPrfSDc0j2TGR7DvR74XRe1dzHZZnrLTiRVR7glX+W4+Oiv5HnymcZ6qDIGsouzKHlm79X9wunK1P0D8MGNv2EHOfZxjXLpHdWz9PleDDPPy28YpLjLwm5fdXDKi4Wzkpb9k+q8t4v/Ymaqk95dICoNdGDfevDcmudHiIVxezgzjmjKzhnqzjzwh7AcMi0ktU3n0b6rpxcT108mwULpTh2qxWBhSNsz5m3/VaFuwr+0AC2QNX5ENizdZGU4R5yc8nd5oiHbHcdMoEwGPAJuQvkTSCIqJfumUvjUwekIK3kfmGa/V7pkvl6EjLCE3txCpAbpdYtlpt3xUbN1qlXbMICZpKLmKidFKs0IwQ==
     groups: ['sudo']
-
-
-  # $version                = hiera('sensu::influxdb::version', '1.6.4-1'),
-  # $influxdb_admin_user    = hiera('sensu::influxdb::admin_user'),
-  # $influxdb_admin_pass    = hiera('sensu::influxdb::admin_pass'),
-  # $influxdb_host          = hiera('sensu::influxdb::host'),
-  # $influxdb_port          = hiera('sensu::influxdb::port'),
-  # $influxdb_use_ssl       = hiera('sensu::influxdb::use_ssl', true),
-  # $influxdb_org           = hiera('sensu::influxdb::influxdb_org', 'myorg'),
-  # $influxdb_bucket        = hiera('sensu::influxdb::influxdb_bucket', 'bucket_test'),
-  # $influxdb_bucket_token  = hiera('sensu::influxdb::influxdb_bucket_token', 'my_bucket_token'),
-  # $influxdb_bucket_port   = hiera('sensu::influxdb::influxdb_bucket_port', 1234),
-  # $bucket_labels          = hiera('sensu::influxdb::bucket_labels', []),

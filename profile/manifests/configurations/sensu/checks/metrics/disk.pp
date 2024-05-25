@@ -1,5 +1,5 @@
 class profile::configurations::sensu::checks::metrics::disk(
-  $ruby_path,
+  $ruby_path = 'changeme',
   $ensure = hiera('sensu::metrics::disk::ensure', 'present'),
 ) {
 
@@ -19,9 +19,9 @@ class profile::configurations::sensu::checks::metrics::disk(
 
       default:
       {
-        sensu_configuration::metric { 'metrics-disk-usage':
+        sensu_configuration::metric { 'disk-metrics':
           ensure   => $ensure,
-          command  => "${ruby_path}metrics-disk-usage.rb --scheme ${prefix}",
+          command  => "metrics-disk-usage.rb --scheme ${prefix}",
           interval => 60,
           refresh  => 60,
         }

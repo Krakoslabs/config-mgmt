@@ -27,7 +27,7 @@ class profile::applications::sensu::server(
     api_port                     => $api_port,
     use_ssl                      => $use_ssl,
   }
-  ## TODO: (2024-06-01): Update sensu::backend class
+  ## TODO: (2024-06-01) - Update sensu::backend class
   class { '::sensu::backend':
     config_hash => {
       'debug'     => false,
