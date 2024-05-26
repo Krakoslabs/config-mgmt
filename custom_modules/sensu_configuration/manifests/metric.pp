@@ -29,7 +29,7 @@ define sensu_configuration::metric(
     command                => $command,
     provider               => $provider,
     subscriptions          => ["entity:${trusted['certname']}"],
-    output_metric_format   => 'influxdb_line',
+    output_metric_format   => 'graphite_plaintext',
     output_metric_handlers => ['influxdb'],
     interval               => $interval + seeded_rand($interval_rand_max, $title),
     publish                => true,

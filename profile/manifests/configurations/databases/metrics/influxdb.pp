@@ -7,8 +7,9 @@ class profile::configurations::databases::metrics::influxdb (
   $influxdb_use_ssl        = hiera('sensu::influxdb::use_ssl', true),
   $influxdb_initial_org    = hiera('sensu::influxdb::initial_org', 'myorg'),
   $influxdb_initial_bucket = hiera('sensu::influxdb::initial_bucket', 'bucket_test'),
-  $influxdb_bucket_token   = hiera('sensu::influxdb::influxdb_bucket_token', 'my_bucket_token'),
-  $influxdb_bucket_port    = hiera('sensu::influxdb::influxdb_bucket_port', 1234),
+  $influxdb_bucket         = hiera('sensu::influxdb::bucket', 'bucket_test'),
+  $influxdb_bucket_token   = hiera('sensu::influxdb::bucket_token', 'my_bucket_token'),
+  $influxdb_bucket_port    = hiera('sensu::influxdb::influxdb_bucket_port', 8086),
   $bucket_labels           = hiera('sensu::influxdb::bucket_labels', ['monitoring']),
 ) {
 
@@ -23,10 +24,13 @@ class profile::configurations::databases::metrics::influxdb (
     use_ssl                 => $influxdb_use_ssl,
     influxdb_initial_org    => $influxdb_initial_org,
     influxdb_initial_bucket => $influxdb_initial_bucket,
+    influxdb_bucket         => $influxdb_bucket,
     influxdb_bucket_token   => Sensitive($influxdb_bucket_token),
-    influxdb_bucket_port    => $influxdb_bucket_port,
+    influxdb_bucket_port    => Integer($influxdb_bucket_port),
     influxdb_bucket_labels  => $influxdb_bucket_labels
   }
+
+  class { 'grafana': }
 
   if $sensu_agent_enabled {
     include ::profile::configurations::sensu::checks::host::influxdb

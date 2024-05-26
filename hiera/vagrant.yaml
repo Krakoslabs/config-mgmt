@@ -15,8 +15,8 @@ puppet::agent::interval_rand_max: 150
 puppet::agent::enabled: false
 puppet::agent::version: 7.30.0
 
-sensu::agent::enabled: false
-sensu::metrics::enabled: false
+sensu::agent::enabled: true
+sensu::metrics::enabled: true
 
 sensu::server::backends: ['ubuntu20-2.vagrant.local:8081']
 sensu::server::api_host: ubuntu20-2.vagrant.local

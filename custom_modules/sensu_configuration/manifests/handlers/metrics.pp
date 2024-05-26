@@ -6,7 +6,8 @@ class sensu_configuration::handlers::metrics (
   $use_ssl      = hiera('sensu::influxdb::use_ssl', true),
   $namespace    = hiera('sensu::agent::namespace'),
   $organization = hiera('sensu::influxdb::initial_org', 'appfire'),
-  $bucket       = hiera('sensu::influxdb::bucket', 'sensu')
+  $bucket       = hiera('sensu::influxdb::bucket', 'sensu'),
+  $bucket_token = hiera('sensu::influxdb::bucket_token')
 ) {
 
   # TODO: (2024-06-01) - Remove flag "--insecure-skip-verify" when we will create the correct certificate
@@ -32,7 +33,7 @@ class sensu_configuration::handlers::metrics (
       "INFLUXDB_ADDR=${addr}",
       "INFLUXDB_BUCKET=${bucket}",
       "INFLUXDB_ORG=${organization}",
-      "INFLUXDB_TOKEN=cqvJ77uIbRkOVClYhtRqe_l_lNmQnsFjbMeRiXEJX9ZkHv6zFZz8bVGlXKj_8SUQMOcdMPXeVCb-cqVwBfex_w=="
+      "INFLUXDB_TOKEN=${$bucket_token}"
     ],
     namespace       => $namespace,
     command         => $command,

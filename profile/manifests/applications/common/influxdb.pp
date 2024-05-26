@@ -8,10 +8,11 @@ class profile::applications::common::influxdb(
   $manage_setup = true,
   $influxdb_initial_org,
   $influxdb_initial_bucket,
+  $influxdb_bucket,
   $influxdb_bucket_token,
-  $influxdb_bucket_port,
-  $influxdb_bucket_labels
-  # $cluster_nodes = [],
+  $influxdb_bucket_labels,
+  $influxdb_bucket_port
+  # $influxdb_bucket_port = [],
   # $auth_enabled  = true,
   # $data_dir      = '/var/lib/influxdb',
   # $handoff_dir   = undef,
@@ -29,7 +30,7 @@ class profile::applications::common::influxdb(
     initial_bucket  => $influxdb_initial_bucket
   }
 
-  # TODO: (2024-06-01) - Example of influxdbv2 query from Dashboard
+  # Example of influxdbv2 query from Dashboard
   # from(bucket: "sensu")
     # |> range(start: v.timeRangeStart, stop:v.timeRangeStop)
 
@@ -38,7 +39,9 @@ class profile::applications::common::influxdb(
   #   token   => $influxdb_bucket_token,
   #   port    => $influxdb_bucket_port,
   #   require => Class['::influxdb']
-  # } ->
+  # }
+
+  # TODO: (2024-06-01) - Create an influxdb Token only for specific bucket
 
   # influxdb_bucket { $influxdb_initial_bucket:
   #   ensure  => present,
@@ -46,7 +49,7 @@ class profile::applications::common::influxdb(
   #   labels  => $bucket_labels,
   #   token   => $influxdb_bucket_token,
   #   port    => $influxdb_bucket_port,
-  #   # require => Resource[$influxdb_initial_org]
+  #   require => Class['::influxdb']
   # }
 
 }

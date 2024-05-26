@@ -25,6 +25,12 @@ class sensu_configuration::assets::base (
         'sensu-plugins/sensu-plugins-process-checks' => { ensure => 'present', version => 'latest', namespace => $namespace },
       }
       create_resources('sensu_bonsai_asset', $assets)
+
+      # sensu_bonsai_asset { 'sensu/sensu-influxdb-handler':
+      #     ensure    => 'present',
+      #     version   => '4.0.0',
+      #     namespace => $namespace
+      # }
       # ensure_resource('Resources', 'sensu_bonsai_asset', $assets)
       # sensu_bonsai_asset { $assets: }
 

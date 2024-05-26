@@ -69,8 +69,9 @@ sensu::influxdb::admin_pass: adminadminadminadmin
 sensu::influxdb::port: 8086
 sensu::influxdb::initial_org: appfire
 sensu::influxdb::initial_bucket: sensu
-sensu::influxdb::influxdb_bucket_token: 7aqnZ71TiVoJBPjqZY4RJhqk5ww8XG_wf7mdp4JZl-PpWam0XJpHN47dPV1G7hbGRTeBUqqpWYUyo2mLEUyxcA==
-sensu::influxdb::influxdb_bucket_port: 8086
+sensu::influxdb::bucket: sensu
+sensu::influxdb::bucket_token: 551JTn8coIsFkEh6jljwui4LVwFRRrJy4boa27LBOCRMjxBcjobbAKvGbD60l_ZdS9gLa61WddJY8ULVJ0m3tg==
+sensu::influxdb::influxdb_bucket_port: "%{hiera('sensu::influxdb::port')}"
 
 users::cloudops_team:
   marcos.gabilondo:
