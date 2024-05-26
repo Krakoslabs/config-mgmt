@@ -41,7 +41,7 @@ class profile::applications::common::influxdb(
   #   require => Class['::influxdb']
   # }
 
-  # TODO: (2024-06-01) - Create an influxdb Token only for specific bucket
+  # TODO: (2024-06-01) - Create TWO influxdb Tokens only for specific bucket (Write permissions for Sensu && Read permissions for grafana)
 
   # influxdb_bucket { $influxdb_initial_bucket:
   #   ensure  => present,

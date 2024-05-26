@@ -1,6 +1,7 @@
 class profile::configurations::sensu::checks::metrics::disk(
   $ruby_path = 'changeme',
   $ensure = hiera('sensu::metrics::disk::ensure', 'present'),
+  $extra_params  = hiera('sensu::host_metrics::disk::extra_params', undef)
 ) {
 
   $prefix = "sensu.${trusted['certname']}.disk"
@@ -21,7 +22,7 @@ class profile::configurations::sensu::checks::metrics::disk(
       {
         sensu_configuration::metric { 'disk-metrics':
           ensure   => $ensure,
-          command  => "metrics-disk-usage.rb --scheme ${prefix}",
+          command  => "metrics-disk-usage.rb --scheme ${prefix} ${extra_params}",
           interval => 60,
           refresh  => 60,
         }

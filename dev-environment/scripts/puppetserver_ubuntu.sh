@@ -40,9 +40,6 @@ wget https://apt.puppetlabs.com/puppet7-release-focal.deb > /dev/null 2>&1
 writeLog "Updating system..."
 apt-get update -y > /dev/null 2>&1
 
-# writeLog "Installing Puppet Agent..."
-# apt-get install -y puppet-agent-6.0.2 > /dev/null 2>&1
-
 writeLog "Installing Puppet Server..."
 apt-get install -y puppetserver > /dev/null 2>&1
 
@@ -51,11 +48,9 @@ apt-get install -y git >/dev/null
 
 writeLog "Installing rbenv..."
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-# git clone https://github.com/rbenv/ruby-build.git $rbenv_path/plugins/ruby-build
-# echo 'export PATH="/usr/local/rvm/bin:$PATH"' >> /root/.bashrc
-# echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+
 writeLog "Installing ruby version: ${ruby_version}"
-source ~/.bashrc 
+source ~/.bashrc
 ${rbenv_path}/rbenv install ${ruby_version}
 ${rbenv_path}/rbenv global ${ruby_version}
 

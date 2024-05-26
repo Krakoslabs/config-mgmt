@@ -70,7 +70,7 @@ sensu::influxdb::port: 8086
 sensu::influxdb::initial_org: appfire
 sensu::influxdb::initial_bucket: sensu
 sensu::influxdb::bucket: sensu
-sensu::influxdb::bucket_token: 551JTn8coIsFkEh6jljwui4LVwFRRrJy4boa27LBOCRMjxBcjobbAKvGbD60l_ZdS9gLa61WddJY8ULVJ0m3tg==
+sensu::influxdb::bucket_token: v9SZkqNYAy4tPqCCsV3Nai7HSoU4ly8oFT7Ly2BtrNs8cyD4y3LwMtVwmnYyrhNGYWDCfVEfo1R5DGbxx5RQzA==
 sensu::influxdb::influxdb_bucket_port: "%{hiera('sensu::influxdb::port')}"
 
 users::cloudops_team:

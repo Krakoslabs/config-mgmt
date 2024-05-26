@@ -40,15 +40,15 @@ function install_ubuntu (){
   apt-get update > /dev/null 2>&1
   apt-get install -y wget > /dev/null 2>&1
 
-  writeLog "Configuring PuppetLabs repo..."
+  writeLog "Configure and Install PuppetLabs repo..."
   REPO_URL="https://apt.puppetlabs.com/puppet7-release-focal.deb"
-  wget $REPO_URL
-  /usr/bin/dpkg -i puppet7-release-focal.deb
+  wget $REPO_URL > /dev/null 2>&1
+  /usr/bin/dpkg -i puppet7-release-focal.deb > /dev/null 2>&1
 
 
   writeLog "Installing Puppet Agent..."
   apt-get update
-  apt-get install -y puppet-agent
+  apt-get install -y puppet-agent > /dev/null 2>&1
 }
 
 if [ $(echo $NAME | grep -ci "ubuntu") == 1 ]; then

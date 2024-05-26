@@ -26,4 +26,5 @@ sensu::influxdb::auth_enabled: false
 sensu::influxdb::data_dir: /var/lib/influxdb
 sensu::influxdb::host: ubuntu20-3.vagrant.local
 
-sensu::host_checks::disk::extra_params: "-p '.snap.*'"
+sensu::host_checks::disk::extra_params: "-p '(.snap.*|.*/docker.*)'"
+# sensu::host_metrics::disk::extra_params: "-I '/dev/mapper/ubuntu.*'"
